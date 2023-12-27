@@ -9,13 +9,13 @@ function App() {
   return (
     <BrowserRouter>
       <AppRoutes />
+      {/* <AdminRoute />- */}
 
       {/* {
           loginRoleType === "user" 
           ? 
             <AppRoutes /> 
           : 
-            <AdminRoute />-
         } */}
     </BrowserRouter>
   );

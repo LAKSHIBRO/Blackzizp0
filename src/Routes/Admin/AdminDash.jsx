@@ -18,7 +18,7 @@ import PopDash from "../../components/Admin/PopDash";
 
 const AdminDash = () => {
   useEffect(() => {
-    // getControls();
+    getControls();
   }, []);
   const getControls = async () => {
     const resp = await axios.get("http://localhost:5001/getcontrols");
@@ -201,20 +201,16 @@ const AdminDash = () => {
     },
   ]);
   const initialControls = [
-    {
-      id: 0,
-      name: "MAKE_DEPOSITS",
-      status: "true",
-    },
+
     {
       id: 1,
       name: "MAKE_DEPOSITS",
-      status: "false",
+      status: false,
     },
     {
       id: 2,
       name: "MAKE_WITHDRAWALS",
-      status: "true",
+      status: true,
     },
 
     // Add more control objects as needed
@@ -324,7 +320,7 @@ const AdminDash = () => {
   const handleControlToggle = async (controlIndex) => {
     const updatedControls = [...controls];
     updatedControls[controlIndex].status =
-      updatedControls[controlIndex].status === "true" ? "false" : "true";
+      updatedControls[controlIndex].status === "true" ? 1 : 0;
     console.log(
       "status id",
       updatedControls[controlIndex].status,
@@ -427,8 +423,8 @@ const AdminDash = () => {
                           </span>
                           <label>
                             <Switch
-                              checked={control.status === "true"}
-                              // onChange={() => handleControlToggle(index)}
+                              checked={control.status === 1}
+                              onChange={() => handleControlToggle(index)}
                             />
                             <span className="text-[#ffa524] text-[12px]">
                               {control.status === "true"

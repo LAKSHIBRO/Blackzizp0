@@ -59,14 +59,12 @@ const Dashboard = () => {
     console.log(
       "🚀 ~ file: Dashboard.jsx:54 ~ getRefUsers ~ response:",
       response.data.data
-    );   const resIrFamily = await axios.get(
+    );
+    const resIrFamily = await axios.get(
       `http://localhost:5001/getIrFamily/get/${user_code}`
     );
-    console.log(
-      "🚀 ~ resIrFamily:",
-      resIrFamily.data.data
-    );
-    setIrFamily(resIrFamily.data.data)
+    console.log("🚀 ~ resIrFamily:", resIrFamily.data.data);
+    setIrFamily(resIrFamily.data.data);
     setRefUsers(response.data);
   };
   const openPopUp = () => {
@@ -298,7 +296,7 @@ const Dashboard = () => {
                   </span>
                 </div>
                 <h3 className="text-white sm:text-[16px]">USERS COUNT</h3>
-                <h3 className="text-white sm:text-[2rem]">46</h3>
+                <h3 className="text-white sm:text-[2rem]">{irFamily?.length}</h3>
                 <button className="lg:py-3 lg:px-6 text-[12px] sm:w-[128px] font-semibold capitalize bg-[#FFA524] rounded-md py-2 px-4 sm:py-2 sm:px-4">
                   View count
                 </button>
@@ -314,9 +312,7 @@ const Dashboard = () => {
                   TOTAL <br /> WITHDRAWALS
                 </h3>
                 <h3 className="text-[#565656] sm:text-[1.2rem]">USDT</h3>
-                <h3 className="text-[2.2rem] text-white font-semibold">
-                  200.45
-                </h3>
+                <h3 className="text-[2.2rem] text-white font-semibold">0.00</h3>
               </div>
             </div>
 
@@ -332,7 +328,7 @@ const Dashboard = () => {
 
                   <h3 className="text-white text-center sm:text-[20px]">
                     {" "}
-                    USDT 201.56
+                    USDT 0.00
                   </h3>
                 </div>
 
@@ -353,7 +349,7 @@ const Dashboard = () => {
 
                   <h3 className="text-white text-center sm:text-[20px]">
                     {" "}
-                    USDT 100.00
+                    USDT 0.00
                   </h3>
                 </div>
 
@@ -449,11 +445,6 @@ const Dashboard = () => {
                         <td className=" text-[12px] text-white p-2 border-[#565656] border-[1px] border-opacity-40">
                           {row.createdAt}
                         </td>
-                        {/* <td className=" text-[12px] text-white p-2 border-[#565656] border-[1px] border-opacity-40 text-center">
-                          <button className="py-1 px-2 text-[10px] text-[#151515] rounded-md bg-gradient-to-r from-[#ffd62d] to-[#ffa524]">
-                            View Active Packages
-                          </button>
-                        </td> */}
                       </tr>
                     ))}
                   </tbody>

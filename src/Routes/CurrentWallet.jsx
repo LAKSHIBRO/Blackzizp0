@@ -37,6 +37,11 @@ const CurrentWallet = () => {
   const [defaultAccount, setDefaultAccount] = useState(null);
   const [userBalance, setUserBalance] = useState(null);
   const [withdrawAmount, setWithdrawAmount] = useState(null);
+  const [controls, setControls] = useState({
+    "make_deposits": false,
+    "make_withdrawals": true,
+    "packages_purchase": true
+});
 
   const connectWallet = () => {
     console.log("connect");
@@ -243,6 +248,12 @@ const CurrentWallet = () => {
     );
 
     setWithdrawalHistory(responseWithdrawal.data);
+    const responseControls = await axios.get(
+      "http://localhost:5001/systemcontrols"
+      
+    );
+console.log('first',responseControls.data.controls)
+    setControls(responseControls.data.controls);
   };
 
   return (
@@ -420,8 +431,18 @@ const CurrentWallet = () => {
             </div>
 
             <button
-              onClick={sendTransaction}
-              className="w-full h-[44px] mt-5 rounded-md font-bold text-[16px] text-[#151515] bg-gradient-to-r from-[#ffd62d] to-[#ffa524]"
+              disabled={!controls?.make_deposits}
+              onClick={sendTransaction}style={{
+                width: '100%',
+                height: '44px',
+                marginTop: '5px',
+                borderRadius: '4px',
+                fontWeight: 'bold',
+                fontSize: '16px',
+                color: '#151515',
+                backgroundImage: 'linear-gradient(to right, #ffd62d, #ffa524)',
+                cursor: !controls?.make_deposits ? 'not-allowed' : 'pointer',
+              }} className="w-full h-[44px] mt-5 rounded-md font-bold text-[16px] text-[#151515] bg-gradient-to-r from-[#ffd62d] to-[#ffa524]"
             >
               Deposit
             </button>
@@ -500,7 +521,20 @@ const CurrentWallet = () => {
               </div>
             </div>
 
-            <button className="w-full h-[44px] mt-5 rounded-md font-bold text-[16px] text-[#151515] bg-gradient-to-r from-[#ffd62d] to-[#ffa524]">
+            <button disabled={!controls?.make_withdrawals}
+              onClick={sendTransaction}style={{
+                width: '100%',
+                height: '44px',
+                marginTop: '5px',
+                borderRadius: '4px',
+                fontWeight: 'bold',
+                fontSize: '16px',
+                color: '#151515',
+                backgroundImage: 'linear-gradient(to right, #ffd62d, #ffa524)',
+                cursor: !controls?.make_withdrawals ? 'not-allowed' : 'pointer',
+              }} className="w-full h-[44px] mt-5 rounded-md font-bold text-[16px] text-[#151515] bg-gradient-to-r from-[#ffd62d] to-[#ffa524]"
+            >
+             
               Withdraw
             </button>
           </div>
