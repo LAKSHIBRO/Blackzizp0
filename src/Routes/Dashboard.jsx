@@ -45,8 +45,7 @@ const Dashboard = () => {
 
   const [isPopUpOpen, setPopUpOpen] = useState(false);
   const getRefUsers = async () => {
-    const resp = await axios.get("http://localhost:5001/token", 
-    );
+    const resp = await axios.get("http://localhost:5001/token");
     const decoded = jwt_decode(resp.data.accessToken);
     setDecodeValues(decoded);
     console.log(
@@ -60,8 +59,14 @@ const Dashboard = () => {
     console.log(
       "🚀 ~ file: Dashboard.jsx:54 ~ getRefUsers ~ response:",
       response.data.data
+    );   const resIrFamily = await axios.get(
+      `http://localhost:5001/getIrFamily/get/${user_code}`
     );
-
+    console.log(
+      "🚀 ~ resIrFamily:",
+      resIrFamily.data.data
+    );
+    setIrFamily(resIrFamily.data.data)
     setRefUsers(response.data);
   };
   const openPopUp = () => {
@@ -131,6 +136,7 @@ const Dashboard = () => {
   ];
 
   const [selectedRowCount, setSelectedRowCount] = useState(10);
+  const [irFamily, setIrFamily] = useState();
   const limitedTableData = tableData.slice(0, selectedRowCount);
   const [notificationCount, setNotificationCount] = useState(0);
 
@@ -403,53 +409,57 @@ const Dashboard = () => {
               </div>
             </div>
 
-            <div className="dash-table mt-5 w-full  h-full overflow-x-auto">
-              <table className="w-full border-[1px] border-[#565656] border-opacity-40 ">
-                <th className="uppercase text-[12px] text-white p-2 border-[#565656] border-r-[1px]  border-opacity-40">
-                  IR Name
-                </th>
-                <th className="uppercase text-[12px] text-white p-2 border-[#565656] border-r-[1px] border-opacity-40">
-                  FIRST NAME
-                </th>
-                <th className="uppercase text-[12px] text-white p-2 border-[#565656] border-r-[1px] border-opacity-40">
-                  LAST NAME
-                </th>
-                <th className="uppercase text-[12px] text-white p-2 border-[#565656] border-r-[1px] border-opacity-40">
-                  registration DATE
-                </th>
-                <th className="uppercase text-[12px] text-white p-2">
-                  activated date
-                </th>
-                <th className="uppercase text-[12px] text-white p-2">action</th>
+            {irFamily && (
+              <div className="dash-table mt-5 w-full  h-full overflow-x-auto">
+                <table className="w-full border-[1px] border-[#565656] border-opacity-40 ">
+                  <th className="uppercase text-[12px] text-white p-2 border-[#565656] border-r-[1px]  border-opacity-40">
+                    IR Name
+                  </th>
+                  <th className="uppercase text-[12px] text-white p-2 border-[#565656] border-r-[1px] border-opacity-40">
+                    FIRST NAME
+                  </th>
+                  <th className="uppercase text-[12px] text-white p-2 border-[#565656] border-r-[1px] border-opacity-40">
+                    LAST NAME
+                  </th>
+                  <th className="uppercase text-[12px] text-white p-2 border-[#565656] border-r-[1px] border-opacity-40">
+                    registration DATE
+                  </th>
+                  <th className="uppercase text-[12px] text-white p-2">
+                    activated date
+                  </th>
+                  {/* <th className="uppercase text-[12px] text-white p-2">
+                    action
+                  </th> */}
 
-                <tbody>
-                  {limitedTableData.map((row) => (
-                    <tr className="w-full" key={row.id}>
-                      <td className=" text-[12px] text-white p-2 border-[#565656] border-[1px] border-opacity-40">
-                        {row.IRname}
-                      </td>
-                      <td className=" text-[12px] text-white p-2 border-[#565656] border-[1px] border-opacity-40">
-                        {row.fname}
-                      </td>
-                      <td className=" text-[12px] text-white p-2 border-[#565656] border-[1px] border-opacity-40">
-                        {row.lname}
-                      </td>
-                      <td className=" text-[12px] text-white p-2 border-[#565656] border-[1px] border-opacity-40">
-                        {row.regdate}
-                      </td>
-                      <td className=" text-[12px] text-white p-2 border-[#565656] border-[1px] border-opacity-40">
-                        {row.actdate}
-                      </td>
-                      <td className=" text-[12px] text-white p-2 border-[#565656] border-[1px] border-opacity-40 text-center">
-                        <button className="py-1 px-2 text-[10px] text-[#151515] rounded-md bg-gradient-to-r from-[#ffd62d] to-[#ffa524]">
-                          View Active Packages
-                        </button>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+                  <tbody>
+                    {irFamily?.map((row) => (
+                      <tr className="w-full" key={row.id}>
+                        <td className=" text-[12px] text-white p-2 border-[#565656] border-[1px] border-opacity-40">
+                          {row.ref_code}
+                        </td>
+                        <td className=" text-[12px] text-white p-2 border-[#565656] border-[1px] border-opacity-40">
+                          {row.username}
+                        </td>
+                        <td className=" text-[12px] text-white p-2 border-[#565656] border-[1px] border-opacity-40">
+                          {row.last_name}
+                        </td>
+                        <td className=" text-[12px] text-white p-2 border-[#565656] border-[1px] border-opacity-40">
+                          {row.createdAt}
+                        </td>
+                        <td className=" text-[12px] text-white p-2 border-[#565656] border-[1px] border-opacity-40">
+                          {row.createdAt}
+                        </td>
+                        {/* <td className=" text-[12px] text-white p-2 border-[#565656] border-[1px] border-opacity-40 text-center">
+                          <button className="py-1 px-2 text-[10px] text-[#151515] rounded-md bg-gradient-to-r from-[#ffd62d] to-[#ffa524]">
+                            View Active Packages
+                          </button>
+                        </td> */}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
           </div>
         </div>
         <div className="w-full h-full absolute object-center -z-20 ">

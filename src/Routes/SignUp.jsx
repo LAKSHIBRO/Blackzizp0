@@ -16,6 +16,7 @@ import AnimateImage from "../components/animateImage";
 import CustomAlert from "../components/customAlert";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
+import axios from "axios";
 
 const SignUp = () => {
   const [showAlert, setShowAlert] = useState(false);
@@ -55,7 +56,7 @@ const SignUp = () => {
 
   const handleBlur = (field) => {
     // Update styles when a field loses focus
-    if (field === "firstName") {
+    if (field === "username") {
       setFirstNameStyle({
         backgroundColor: "white",
         color: "black",
@@ -70,12 +71,12 @@ const SignUp = () => {
         backgroundColor: "white",
         color: "black",
       });
-    } else if (field === "contactNumber") {
+    } else if (field === "mobile") {
       setContactNumberStyle({
         backgroundColor: "white",
         color: "black",
       });
-    } else if (field === "sponsor") {
+    } else if (field === "ref_code") {
       setSponsorStyle({
         backgroundColor: "white",
         color: "black",
@@ -90,7 +91,7 @@ const SignUp = () => {
         backgroundColor: "white",
         color: "black",
       });
-    } else if (field === "confirmPassword") {
+    } else if (field === "confPassword") {
       setConfirmPasswordStyle({
         backgroundColor: "white",
         color: "black",
@@ -99,7 +100,7 @@ const SignUp = () => {
   };
 
   const SignupSchema = Yup.object().shape({
-    firstName: Yup.string()
+    username: Yup.string()
       .min(2, "Too Short!")
       .max(50, "Too Long!")
       .matches(/^[A-Za-z]+$/, "Must be only Letters")
@@ -110,7 +111,7 @@ const SignUp = () => {
       .matches(/^[A-Za-z]+$/, "Must be only Letters")
       .required("Required"),
     email: Yup.string().email("Invalid email").required("Required"),
-    contactNumber: Yup.string()
+    mobile: Yup.string()
       .min(10, "Invalid Number")
       .matches(
         /^(\+?\d{0,4})?\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{4}\)?)?$/,
@@ -118,7 +119,7 @@ const SignUp = () => {
       )
       .required("Required"),
     nic: Yup.string().required("Required"),
-    sponsor: Yup.string().required("Required"),
+    ref_code: Yup.string().required("Required"),
     password: Yup.string()
       .min(8, "Must be at least 8 characters long")
       .matches(
@@ -126,7 +127,7 @@ const SignUp = () => {
         "Must contain at least 8 Characters, 1 Uppercase, 1 Lowercase, 1 Special Character, and 1 Number"
       )
       .required("Required"),
-    confirmPassword: Yup.string()
+    confPassword: Yup.string()
       .min(8, "Must be at least 8 characters long")
       .oneOf([Yup.ref("password")], "Your passwords do not match.")
       .required("Required"),
@@ -138,14 +139,14 @@ const SignUp = () => {
   const fileInputRef = useRef(null);
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [formData, setFormData] = useState({
-    firstName: "",
+    username: "",
     lastName: "",
     email: "",
-    contactNumber: "",
+    mobile: "",
     nic: "",
-    referalID: "",
+    ref_code: "",
     password: "",
-    confirmPassword: "",
+    confPassword: "",
   });
 
   const handleFileInputChange = (e) => {
@@ -170,7 +171,22 @@ const SignUp = () => {
   const handleSubmit = () => {
    console.log('object');
   };
+  const handleFormSubmit = async (values) => {
+console.log('objeco00t',values);
+    try {
+      // Replace 'your/api/endpoint' with the actual URL of your API endpoint
+      const response = await axios.post('http://localhost:5001/register', values);
 
+      console.log("API Response:", response.data);
+      setTimeout(() => {
+        navigate("/");
+      }, 2000);
+      // Handle the response or update the state if necessary
+    } catch (error) {
+      console.error("API Error:", error);
+      // Handle errors or update the state if necessary
+    }
+  };
   return (
     <div className="w-full h-screen overflow-hidden fixed bg-gradient-to-br from-[#2d2d2d] via-[#151517] to-[#131314]">
       <div className="flex w-full h-full relative">
@@ -214,18 +230,18 @@ const SignUp = () => {
 
             <Formik
               initialValues={{
-                firstName: "",
+                username: "",
                 lastName: "",
                 email: "",
-                contactNumber: "",
-                sponsor: "",
+                mobile: "",
+                ref_code: "",
                 nic: "",
                 password: "",
-                confirmPassword: "",
+                confPassword: "",
               }}
               validationSchema={SignupSchema}
               onSubmit={(values) => {
-                console.log('gdfgd',values);
+                handleFormSubmit(values);
               }}
             >
               {({ errors, touched }) => (
@@ -238,9 +254,9 @@ const SignUp = () => {
                             First Name
                           </span>
 
-                          {errors.firstName && touched.firstName ? (
+                          {errors.username && touched.username ? (
                             <span className="text-red-600 text-[12px] ">
-                              {errors.firstName}
+                              {errors.username}
                             </span>
                           ) : null}
                         </div>
@@ -252,17 +268,17 @@ const SignUp = () => {
                           </div>
                           <Field
                             type="text"
-                            name="firstName"
-                            id="firstName"
+                            name="username"
+                            id="username"
                             placeholder="First Name"
                             style={firstNameStyle}
                             className="w-full h-full p-2 bg-transparent outline-none text-white text-[12px] form-control form-field-input"
                             required
                           />
                         </div>
-                        {errors.firstName && touched.firstName ? (
+                        {errors.username && touched.username ? (
                           <span className="text-red-600 text-[12px] block sm:hidden">
-                            {errors.firstName}
+                            {errors.username}
                           </span>
                         ) : null}
                       </div>
@@ -421,9 +437,9 @@ const SignUp = () => {
                           <span className="text-white text-[12px] uppercase hidden sm:block">
                             Contact number
                           </span>
-                          {errors.contactNumber && touched.contactNumber ? (
+                          {errors.mobile && touched.mobile ? (
                             <span className="text-red-600 text-[12px]">
-                              {errors.contactNumber}
+                              {errors.mobile}
                             </span>
                           ) : null}
                         </div>
@@ -435,17 +451,17 @@ const SignUp = () => {
                           </div>
                           <Field
                             type="text"
-                            name="contactNumber"
-                            id="contactNumber"
+                            name="mobile"
+                            id="mobile"
                             style={contactNumberStyle}
                             placeholder="Contact"
                             className="form-field-input w-full h-full p-2 bg-transparent outline-none text-white text-[12px]"
                             required
                           />
                         </div>
-                        {errors.contactNumber && touched.contactNumber ? (
+                        {errors.mobile && touched.mobile ? (
                           <span className="text-red-600 text-[12px] block sm:hidden">
-                            {errors.contactNumber}
+                            {errors.mobile}
                           </span>
                         ) : null}
                       </div>
@@ -475,9 +491,9 @@ const SignUp = () => {
                           <span className="text-white text-[12px] uppercase hidden sm:block">
                             Sponsor ID
                           </span>
-                          {errors.sponsor && touched.sponsor ? (
+                          {errors.ref_code && touched.ref_code ? (
                             <span className="text-red-600 text-[12px]">
-                              {errors.sponsor}
+                              {errors.ref_code}
                             </span>
                           ) : null}
                         </div>
@@ -489,8 +505,8 @@ const SignUp = () => {
                           </div>
                           <Field
                             type="text"
-                            name="sponsor"
-                            id="sponsor"
+                            name="ref_code"
+                            id="ref_code"
                             style={sponsorStyle}
                           
                             placeholder="Referal ID"
@@ -499,9 +515,9 @@ const SignUp = () => {
                            
                           />
                         </div>
-                        {errors.sponsor && touched.sponsor ? (
+                        {errors.ref_code && touched.ref_code ? (
                           <span className="text-red-600 text-[12px] block sm:hidden">
-                            {errors.sponsor}
+                            {errors.ref_code}
                           </span>
                         ) : null}
                       </div>
@@ -570,8 +586,8 @@ const SignUp = () => {
                               type={
                                 confirmPasswordVisible ? "text" : "password"
                               }
-                              name="confirmPassword"
-                              id="confirmPassword"
+                              name="confPassword"
+                              id="confPassword"
                               style={confirmPasswordStyle}
                              
                               required
@@ -595,9 +611,9 @@ const SignUp = () => {
                               )}
                             </div>
                           </div>
-                          {errors.confirmPassword && touched.confirmPassword ? (
+                          {errors.confPassword && touched.confPassword ? (
                             <span className="text-red-600 text-[12px]">
-                              {errors.confirmPassword}
+                              {errors.confPassword}
                             </span>
                           ) : null}
                         </div>

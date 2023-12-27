@@ -16,14 +16,16 @@ const MyActivePackages = () => {
   }, []);
   const [resData, setResData] = useState([]);
   const getHistory = async () => {
-    // const resp = await axios.get("http://localhost:5001/token");
-    // const resp = await axios.get("http://localhost:5001/token");
-    // const decoded = jwt_decode(resp.data.accessToken);
-
-    // const user_id = 'U2FsdGVkX1+zfeayNoqpR0jdNy8mTyUIEXIESadKIjlttXMXoQ6hZnYomxzvrhnz';
+    const user_response = await axios.get("http://localhost:5001/token");
+    const decoded = jwt_decode(user_response.data.accessToken);
+    console.log(
+      "🚀 ~ file: MyProfile.jsx:121 ~ refreshToken ~ decoded:",
+      decoded
+    );
+    const user_id = decoded.userId
 
     const response = await axios.get(
-      `http://localhost:5001/getpackages/1`
+      `http://localhost:5001/getpackages/${user_id}`
     );
     console.log(
       "🚀 ~ file: MyActivePackages.jsx:33 ~ getHistory ~ response:",
