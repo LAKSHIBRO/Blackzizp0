@@ -1,0 +1,95 @@
+:root{
+    --primary-gold: #E08E20;
+    --ghost-gold:#ffb5540e;
+    --secondary-gold:#ffd62d;
+}
+
+
+.card-tree {
+    background: var(--surface-card);
+    padding: 2rem;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+}
+
+
+
+
+.p-organizationchart-table>tbody>tr>td {
+    text-align: center;
+    vertical-align: top;
+    padding: 0 0.75rem;
+}
+.p-organizationchart .p-organizationchart-node-content {
+    padding: 1.25rem;
+    border-radius: 8px;
+}
+.p-organizationchart-table {
+    border-spacing: 0;
+    border-collapse: separate;
+    margin: 0 auto;
+}
+
+.p-organizationchart .p-organizationchart-line-left {
+    border-right: 1px solid var(--secondary-gold);
+    border-color: var(--secondary-gold);
+}
+.p-organizationchart-line-left, .p-organizationchart-line-right {
+    border-radius: 0;
+}
+.p-organizationchart .p-organizationchart-node-content.p-highlight {
+    background: var(--ghost-gold);
+    color: var(--primary-gold);
+}
+.p-organizationchart-node-content .p-node-toggler {
+    position: absolute;
+    bottom: -0.75rem;
+    margin-left: -0.75rem;
+    z-index: 2;
+    left: 50%;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: pointer;
+    width: 1.5rem;
+    height: 1.5rem;
+    text-decoration: none;
+}
+.p-organizationchart .p-organizationchart-node-content .p-node-toggler {
+    /* background: inherit;
+    color: inherit; */
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--secondary-gold);
+    color: #151515;
+}
+.p-component, .p-component * {
+    box-sizing: border-box;
+}
+.p-organizationchart-line-down {
+    margin: 0 auto;
+    height: 20px;
+    width: 1px;
+}
+.p-organizationchart .p-organizationchart-line-down {
+    background: var(--secondary-gold);
+}
+.p-organizationchart .p-organizationchart-line-top {
+    border-top: 1px solid var(--secondary-gold);
+    border-color: var(--secondary-gold);
+}
+.p-component {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-size: 1rem;
+    font-weight: normal;
+}
+.p-organizationchart-selectable-node {
+    cursor: pointer;
+}
+.p-organizationchart-node-content {
+    display: inline-block;
+    position: relative;
+}

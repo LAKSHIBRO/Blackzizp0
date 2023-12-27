@@ -1,0 +1,416 @@
+@media (min-width:1360px) and (max-width:1440px) {
+    .res-sidenav {
+        width: 220px;
+    }
+
+    .res-sidenav .parent-link .nav-head .nav-head-category {
+        height: 28px;
+
+    }
+
+    .res-sidenav .parent-link .nav-head .nav-head-category span {
+        font-size: 8px;
+
+    }
+
+    .child-link .child-link-outter-1,
+    .child-link .child-link-outter-2,
+    .sublinks .sublink-outter-1 {
+        height: 32px;
+
+    }
+
+    .child-link .child-link-bar {
+        height: 28px;
+    }
+
+    .child-link-active {
+        height: 32px;
+    }
+    .child-link .ico-box
+    {
+        width: 24px;
+        height: 24px;
+    }
+    .child-link .ico-span
+    {
+        font-size: 12px;
+    }
+    .link-label
+    {
+        font-size: 10px;
+        width: 100%;
+        text-align: left;
+    }
+    .res-body {
+        margin-left: 220px;
+    }
+
+    .res-crypt-card {
+        width: 220px;
+        height: 100px;
+    }
+    .res-crypt-card .coin-box{
+        width: 100px;
+        height: 100px;
+    }
+    .res-crypt-card .crpt-info h3
+    {
+        font-size: 10px;
+    }
+
+    .res-crypt-card .crpt-info h4
+    {
+        font-size: 14px;
+    }
+    .res-crypt-card .crpt-info
+    {
+        width: 120px;
+    }
+    .res-crypt-card  .crpt-back-bar{
+        height: 44px;
+    }
+    .res-mid-body .dash-profile {
+        width: 640px;
+        height: 400px;
+    }
+
+    .res-mid-body .res-mb-card {
+        width: 128px;
+        height: 180px;
+    }
+
+    .res-mid-body .res-mb-card .chart-ind {
+        width: 100px;
+        height: 100px;
+    }
+
+
+    .res-mid-body .res-mb-card-2 {
+        width: 200px;
+    }
+
+
+
+
+
+
+
+
+
+    /* Signup */
+    .form-field-container .form-field-input-container
+    {
+        height: 28px;
+    }
+    .form-field-container .form-field-input-container .form-field-input-icobox
+    {
+        height: 28px;
+        width: 28px;
+    }
+    .form-button
+    {
+        height: 32px;
+        padding: 0;
+    }
+    /* Signup */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /* purchase */
+.package-card-vip
+{
+    width: 156px;
+    height: 256px;
+}
+
+.package-card-body
+{
+    height: 176px;
+
+}
+.vip_price
+{
+    font-size: 1.2rem !important;
+}
+.package-card-vip .price-top
+{
+    width:157px ;
+    height: 87px;
+}
+.package-card-vip .price-top .package-card-shape
+{
+    width: 156px;
+    height: 87px;
+}
+
+.package-card-vip .price-top .package-card-shape .crown 
+{
+    font-size: 14px;
+}
+.package-card-vip .price-top .package-card-shape h3 
+{
+    font-size: 14px;
+}
+
+.package-card-vip .package-card-body h4
+{
+    font-size: 10px;
+}
+
+
+
+    /* purchase */
+
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media(max-width:576px) {
+
+    #style-6::-webkit-scrollbar-track,
+    .MuiDateCalendar-root.custom-calendar.css-cwhad8-MuiDateCalendar-root::-webkit-scrollbar-track,
+    .MuiYearCalendar-root.css-1n9wbkw-MuiYearCalendar-root::-webkit-scrollbar-track {
+        /* -webkit-box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.3);
+        background-color: #F5F5F5;
+         */
+
+        display: none !important;
+    }
+
+    #style-6::-webkit-scrollbar,
+    .MuiDateCalendar-root.custom-calendar.css-cwhad8-MuiDateCalendar-root::-webkit-scrollbar,
+    .MuiYearCalendar-root.css-1n9wbkw-MuiYearCalendar-root::-webkit-scrollbar {
+        /* width: 2px;
+        background-color: #F5F5F5; */
+
+        display: none !important;
+
+    }
+
+    #style-6::-webkit-scrollbar-thumb,
+    .MuiDateCalendar-root.custom-calendar.css-cwhad8-MuiDateCalendar-root::-webkit-scrollbar-thumb,
+    .MuiYearCalendar-root.css-1n9wbkw-MuiYearCalendar-root::-webkit-scrollbar-thumb {
+        /* background-color: #F90;
+        background-image: -webkit-linear-gradient(45deg,
+                rgba(255, 255, 255, .2) 25%,
+                transparent 25%,
+                transparent 50%,
+                rgba(255, 255, 255, .2) 50%,
+                rgba(255, 255, 255, .2) 75%,
+                transparent 75%,
+                transparent) */
+        display: none !important;
+
+    }
+
+
+
+
+
+
+
+
+
+    /* Add this CSS to your stylesheets */
+    .res-sidenav {
+        /* Set initial position to be fully outside the viewport */
+        transform: translateX(-100%);
+        transition: transform 0.3s ease-in-out;
+        /* ... other styles ... */
+    }
+
+    /* Apply the open class to slide in */
+    .res-sidenav.sidenav-open {
+        transform: translateX(0);
+    }
+
+    /* Apply opacity and transition for a fade-in effect */
+    .res-sidenav.sidenav-open {
+        opacity: 1;
+    }
+
+
+    .My_Wallet_Details .MWD_row_1,
+    .My_Wallet_Details .MWD_row_2,
+    .wallet-WD {
+        flex-direction: column;
+    }
+
+
+
+
+
+
+
+    .package-card-vip:hover {
+        background-color: #151515;
+        transition: .5s ease-in-out;
+        transform: translateY(0);
+
+    }
+
+    .bvpoints {
+        flex-direction: column;
+    }
+
+
+    #popup-2{
+        width: 220px;
+      }
+      
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 
+@media (-webkit-device-pixel-ratio: 1.25) {
+    * {
+      zoom: 0.8;
+    }
+  }
+   */
+
+
+
+   @keyframes rotate {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes rotatemid {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(-360deg);
+    }
+  }
+
+  @keyframes rotateMidTwo {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+
+  @keyframes rotateOutter {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(-360deg);
+    }
+  }
+
+
+  
+  .rotating-center-ring {
+    animation: rotate 30s linear infinite; 
+  }
+  .rotating-mid-ring {
+    animation: rotatemid 60s linear infinite; 
+  }
+
+  .rotating-mid-ring-two
+  {
+    animation: rotateMidTwo 120s linear infinite; 
+  }
+
+
+  .rotating-outter-ring
+  {
+    animation: rotateOutter 180s linear infinite; 
+  }
+  /* CustomAlert.css */
+.custom-alert {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .custom-alert-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+  }
+  
+  .custom-alert button {
+    margin-top: 10px;
+    padding: 8px 16px;
+    background-color: #FFA524;
+    color: #151515;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  
+  .custom-alert button:hover {
+    background-color: #FFDC4A;
+  }
+  

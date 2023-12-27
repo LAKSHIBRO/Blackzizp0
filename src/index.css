@@ -1,0 +1,418 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont,'Inter';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Inter',
+    monospace;
+}
+
+
+
+.child-link {
+  transition: transform 1s ease-in-out;
+}
+
+.child-link-Inactive {
+  /* display: block; */
+  transform: translateX(0);
+  pointer-events: auto;
+}
+
+.child-link-active {
+ /* display: none; */
+ transform: translateX(-100%);
+  pointer-events: none; 
+}
+.child-link-Inactive:hover span
+{
+  color: #F5F5F5 !important;
+  transition: .5s ease-out;
+}
+
+.sublink{
+  transition: transform 1s ease-in-out;
+}
+
+.sublink-Inactive {
+  /* display: block; */
+  transform: translateX(0);
+  pointer-events: auto;
+}
+
+.sublink-active {
+ /* display: none; */
+ transform: translateX(-100%);
+  pointer-events: none; 
+}
+
+.sublink:hover span
+{
+ color: #F5F5F5 !important;
+ transition: .5s ease-out;
+ padding-left: 5px;
+}
+
+/* .activeSublink:hover span
+{
+ color: #FFA524 !important;
+ transition: none !important;
+ padding: 0 !important;
+} */
+
+
+
+.price-top
+{
+  clip-path: polygon(0 0, 100% 0%, 100% 50%, 50% 100%, 0 50%);
+}
+
+
+
+
+
+
+#style-6::-webkit-scrollbar-track,
+.MuiDateCalendar-root.custom-calendar.css-cwhad8-MuiDateCalendar-root::-webkit-scrollbar-track,
+.MuiYearCalendar-root.css-1n9wbkw-MuiYearCalendar-root::-webkit-scrollbar-track
+{
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+  background-color: #F5F5F5;
+}
+
+#style-6::-webkit-scrollbar,
+.MuiDateCalendar-root.custom-calendar.css-cwhad8-MuiDateCalendar-root::-webkit-scrollbar,
+.MuiYearCalendar-root.css-1n9wbkw-MuiYearCalendar-root::-webkit-scrollbar
+{
+  width: 10px;
+  background-color: #F5F5F5;
+}
+
+#style-6::-webkit-scrollbar-thumb,
+.MuiDateCalendar-root.custom-calendar.css-cwhad8-MuiDateCalendar-root::-webkit-scrollbar-thumb,
+.MuiYearCalendar-root.css-1n9wbkw-MuiYearCalendar-root::-webkit-scrollbar-thumb
+{
+  background-color: #F90;	
+  background-image: -webkit-linear-gradient(45deg,
+                                            rgba(255, 255, 255, .2) 25%,
+                        transparent 25%,
+                        transparent 50%,
+                        rgba(255, 255, 255, .2) 50%,
+                        rgba(255, 255, 255, .2) 75%,
+                        transparent 75%,
+                        transparent)
+}
+
+
+
+
+#style-5::-webkit-scrollbar-track
+{
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+  background-color: #F5F5F5;
+  cursor: pointer;
+}
+
+#style-5::-webkit-scrollbar
+{
+  height: 10px;
+  background-color: #F5F5F5;
+  cursor: pointer;
+}
+
+#style-5::-webkit-scrollbar-thumb
+{
+  cursor: pointer;
+  background-color: #F90;	
+  background-image: -webkit-linear-gradient(45deg,
+                                            rgba(255, 255, 255, .2) 25%,
+                        transparent 25%,
+                        transparent 50%,
+                        rgba(255, 255, 255, .2) 50%,
+                        rgba(255, 255, 255, .2) 75%,
+                        transparent 75%,
+                        transparent)
+}
+
+
+
+
+
+.MuiButtonBase-root,
+.MuiDayCalendar-weekDayLabel {
+  color: #FFFFFF !important;
+}
+.Mui-selected
+{
+  background-color: #FFA524 !important;
+  color: #FFFFFF !important;
+}
+.MuiPickersDay-today
+{
+  color: #FFFFFF !important;
+  border:1px solid #FFA524 !important;
+}
+
+
+
+
+.package-card-vip:hover,
+.common-card:hover
+{
+  background-color: #151515;
+transition: .5s ease-in-out;
+transform: translateY(10%);
+
+}
+
+.package-card-vip:hover .crown,
+.common-card:hover .crown,
+.package-card-vip:hover h3,
+.common-card:hover h3,
+.package-card-vip:hover h4,
+.common-card:hover h4
+{
+  color: #F5F5F5;
+  transition: .5s ease-in-out;
+}
+.package-card-vip:hover .price-top,
+.common-card:hover .price-top,
+.common-card:hover button,
+.package-card-vip:hover button
+{
+  background-color: #FFA524;
+  transition: .5s ease-in-out;
+}
+
+.packageTable .packageList:nth-child(2)
+{
+  border-bottom: 1px solid rgb(86, 86, 86, 0.4);
+  border-top: 1px solid rgb(86, 86, 86, 0.4);
+  
+}
+
+.wm:hover .bg-trans
+{
+
+  transform: scale(10);
+  transition: all 0.5s ease-in-out;
+}
+
+.wm:hover
+{
+  color: #151515;
+}
+
+
+
+
+
+
+
+
+
+
+/* BinaryTree */
+
+.binary-tree {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.node {
+  width: 60px;
+  height: 60px;
+  border: 2px solid #000;
+  border-radius: 50%;
+  background-color: #4CAF50; /* Green background color */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  font-weight: bold;
+  color: #fff;
+  margin: 10px; /* Adjust this to control the spacing between nodes */
+}
+
+.level-2 {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.level-3 {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+
+
+
+/* CSS for the transition */
+.overview-body, .edit-body {
+  transform: translateX(-100%);
+  transition: transform 0.8s ease-in-out;
+}
+
+/* CSS for when the body is active and revealed */
+.active-body {
+  transform: translateX(0);
+}
+
+
+
+.referralID[readonly] {
+  border: none;
+  background-color: transparent;
+  outline: none;
+  color: inherit;
+  cursor: text;
+}
+
+
+
+
+
+#style-7::-webkit-scrollbar-track
+{
+  /* -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+  background-color: #F5F5F5; */
+  display: none !important;
+}
+
+#style-7::-webkit-scrollbar
+{
+  /* width: 10px;
+  background-color: #F5F5F5; */
+  display: none !important;
+}
+
+#style-7::-webkit-scrollbar-thumb
+{
+  /* background-color: #F90;	
+  background-image: -webkit-linear-gradient(45deg,
+                                            rgba(255, 255, 255, .2) 25%,
+                        transparent 25%,
+                        transparent 50%,
+                        rgba(255, 255, 255, .2) 50%,
+                        rgba(255, 255, 255, .2) 75%,
+                        transparent 75%,
+                        transparent) */
+
+                        display: none !important;
+}
+
+
+
+
+
+
+
+
+.Mui-checked
+{
+color: #ffd62d !important;
+}
+
+ .MuiSwitch-track
+{
+  background-color: #ffd62d !important;
+}
+
+
+
+
+
+
+.signout-btn:hover span
+{
+  color: #FFA524;
+  transition: all .5s ease-in-out;
+}
+
+
+.MuiFormControlLabel-label
+{
+  font-size: 12px !important;
+}
+
+.packageList td{
+  height: 44px !important;
+}
+
+
+
+
+
+
+
+
+
+.modal {
+  font-size: 12px;
+  background-color: #151515;
+  color: #cfcece;
+  border: 1px solid rgb(86, 86, 86, 0.4);
+  padding: 10px;
+  border-radius: 6px !important;
+}
+
+.popup-content{
+ padding: 0 !important;
+ border-radius: 6px !important;
+} 
+.modal > .header {
+  width: 100%;
+  /* border-bottom: 1px solid gray; */
+  font-size: 18px;
+  text-align: center;
+  padding: 5px;
+}
+.modal > .content {
+  width: 100%;
+  /* padding: 10px 5px; */
+  padding: 0 !important;
+}
+.modal > .actions {
+  width: 100%;
+  padding: 10px 5px;
+  margin: auto;
+  text-align: center;
+}
+.modal > .close {
+  cursor: pointer;
+  position: absolute;
+  display: block;
+  padding: 2px 5px;
+  line-height: 20px;
+  right: -10px;
+  top: -10px;
+  font-size: 24px;
+  background: #FFA524;
+  border-radius: 18px;
+  /* border: 1px solid #cfcece; */
+}
+
+
+
+
+
+
+
+
+
+/* dashboard */
+#popup-2{
+  width: 300px;
+}
+
