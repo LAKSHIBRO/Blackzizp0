@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCrown, faCoins, faShield, faGem } from '@fortawesome/free-solid-svg-icons';
 import axios from "axios";
 import jwt_decode from "jwt-decode";
+import { env_data } from "../config/config";
 
 
 const PopUp = ({ icon, name, list, price, closePopUp, pkg }) => {
@@ -20,7 +21,7 @@ const PopUp = ({ icon, name, list, price, closePopUp, pkg }) => {
     }, []);
     const refreshToken = async () => {
         try {
-          const response = await axios.get("http://localhost:5001/token");
+          const response = await axios.get(`${env_data.base_url}/token`);
           const decoded = jwt_decode(response.data.accessToken);
           console.log(
             "🚀 ~ file: MyProfile.jsx:121 ~ refreshToken ~ decoded:",
@@ -39,7 +40,7 @@ const PopUp = ({ icon, name, list, price, closePopUp, pkg }) => {
         e.preventDefault();
         try {
           //   setWait(true);
-          const res = await axios.post("http://localhost:5001/buypackage", {
+          const res = await axios.post(`${env_data.base_url}/buypackage`, {
             packageId: selectedPkg,
             userId: userId,
           });

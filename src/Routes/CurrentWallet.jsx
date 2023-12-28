@@ -22,6 +22,7 @@ import AAVE from "../Assets/Icons/aave.png";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
 import { ethers } from "ethers";
+import { env_data } from "../config/config";
 
 const CurrentWallet = () => {
   useEffect(() => {
@@ -186,7 +187,7 @@ const CurrentWallet = () => {
 
   const refreshToken = async () => {
     try {
-      const response = await axios.get("http://localhost:5001/token");
+      const response = await axios.get(`${env_data.base_url}/token`);
       setToken(response.data.accessToken);
       const decoded = jwt_decode(response.data.accessToken);
       console.log("🚀 ~ refreshToken ~ decoded:", decoded);
@@ -206,7 +207,7 @@ const CurrentWallet = () => {
     async (config) => {
       const currentDate = new Date();
       if (expire * 1000 < currentDate.getTime()) {
-        const response = await axios.get("http://localhost:5001/token");
+        const response = await axios.get(`${env_data.base_url}/token`);
         config.headers.Authorization = `Bearer ${response.data.accessToken}`;
         setToken(response.data.accessToken);
         const decoded = jwt_decode(response.data.accessToken);
@@ -223,7 +224,7 @@ const CurrentWallet = () => {
   );
 
   const getHistory = async () => {
-    const resp = await axios.get("http://localhost:5001/token");
+    const resp = await axios.get(`${env_data.base_url}/token`);
     const decoded = jwt_decode(resp.data.accessToken);
 
     console.log(
@@ -232,7 +233,7 @@ const CurrentWallet = () => {
     );
     const user_name = decoded.username;
     const response = await axios.post(
-      "http://localhost:5001/recharge/history",
+      `${env_data.base_url}/recharge/history`,
       {
         username: user_name,
       }
@@ -241,7 +242,7 @@ const CurrentWallet = () => {
     setRechargeHistory(response.data);
 
     const responseWithdrawal = await axios.post(
-      "http://localhost:5001/withdraw/history",
+      `${env_data.base_url}/withdraw/history`,
       {
         username: user_name,
       }
@@ -249,7 +250,7 @@ const CurrentWallet = () => {
 
     setWithdrawalHistory(responseWithdrawal.data);
     const responseControls = await axios.get(
-      "http://localhost:5001/systemcontrols"
+      `${env_data.base_url}/systemcontrols`
       
     );
 console.log('first',responseControls.data.controls)
