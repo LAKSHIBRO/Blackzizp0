@@ -41,7 +41,7 @@ const PopUp = ({ icon, name, list, price, closePopUp, pkg }) => {
         try {
           //   setWait(true);
           const res = await axios.post(`${env_data.base_url}/buypackage`, {
-            packageId: selectedPkg,
+            packageId: pkg[0].id,
             userId: userId,
           });
           closePopUp();

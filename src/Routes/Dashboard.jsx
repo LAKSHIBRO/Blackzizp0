@@ -329,7 +329,7 @@ const Dashboard = () => {
 
                   <h3 className="text-white text-center sm:text-[20px]">
                     {" "}
-                    USDT 0.00
+                    USDT {decodeValues ? decodeValues.balance : 0.00}
                   </h3>
                 </div>
 
@@ -350,7 +350,7 @@ const Dashboard = () => {
 
                   <h3 className="text-white text-center sm:text-[20px]">
                     {" "}
-                    USDT 0.00
+                    USDT {decodeValues ? decodeValues.balance : 0.00}
                   </h3>
                 </div>
 
