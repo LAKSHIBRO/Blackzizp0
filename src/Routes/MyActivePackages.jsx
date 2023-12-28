@@ -50,7 +50,7 @@ const MyActivePackages = () => {
 
     // Convert the relevantPackages object into an array
     const relevantPackagesArray = Object.values(relevantPackages);
-    setResData(relevantPackagesArray);
+    setResData(packages);
     console.log("relevantPackagesArray", relevantPackagesArray);
   };
   const buyPackagesData = [
