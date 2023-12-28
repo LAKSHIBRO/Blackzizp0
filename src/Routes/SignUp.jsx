@@ -17,6 +17,7 @@ import CustomAlert from "../components/customAlert";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
+import { env_data } from "../config/config";
 
 const SignUp = () => {
   const [showAlert, setShowAlert] = useState(false);
@@ -175,7 +176,7 @@ const SignUp = () => {
 console.log('objeco00t',values);
     try {
       // Replace 'your/api/endpoint' with the actual URL of your API endpoint
-      const response = await axios.post('http://localhost:5001/register', values);
+      const response = await axios.post(`${env_data.base_url}/register`, values);
 
       console.log("API Response:", response.data);
       setTimeout(() => {

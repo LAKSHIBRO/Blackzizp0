@@ -15,13 +15,14 @@ import UpdateUser from "./UpdateUser";
 import axios from "axios";
 
 import PopDash from "../../components/Admin/PopDash";
+import { env_data } from "../../config/config";
 
 const AdminDash = () => {
   useEffect(() => {
     getControls();
   }, []);
   const getControls = async () => {
-    const resp = await axios.get("http://localhost:5001/getcontrols");
+    const resp = await axios.get(`${env_data.base_url}/getcontrols`);
     setControls(resp.data.controls);
     console.log(
       "🚀 ~ file: AdminDash.jsx:24 ~ getControls ~ resp.data.controls:",
@@ -263,7 +264,7 @@ const AdminDash = () => {
       "updatedPackageTable[packageIndex].availability[statusIndex]",
       updatedPackageTable[packageIndex].availability[statusIndex].id
     );
-    // const response = await axios.put("http://localhost:5001/changeStatus", {
+    // const response = await axios.put(`${env_data.base_url}/changeStatus`, {
     //   status:  updatedPackageTable[packageIndex].availability[statusIndex].checked,
     //   id:  updatedPackageTable[packageIndex].availability[statusIndex].id,
     // });
@@ -326,7 +327,7 @@ const AdminDash = () => {
       updatedControls[controlIndex].status,
       updatedControls[controlIndex].id
     );
-    const response = await axios.put("http://localhost:5001/changeStatus", {
+    const response = await axios.put(`${env_data.base_url}/changeStatus`, {
       status: (updatedControls[controlIndex].status =
         updatedControls[controlIndex].status),
       id: updatedControls[controlIndex].id,

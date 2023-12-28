@@ -9,6 +9,7 @@ import commonbg from "../Assets/images/gergeg-01.png";
 import AnimatedImage from "../components/AnimatedBG";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
+import { env_data } from "../config/config";
 
 const MyEarnings = () => {
   useEffect(() => {
@@ -186,7 +187,7 @@ const MyEarnings = () => {
   };
 
   const getHistory = async () => {
-    const resp = await axios.get("http://localhost:5001/token");
+    const resp = await axios.get(`${env_data.base_url}/token`);
     const decoded = jwt_decode(resp.data.accessToken);
 
     console.log(
@@ -195,7 +196,7 @@ const MyEarnings = () => {
     );
     const user_id = decoded.userId;
     const response = await axios.get(
-      `http://localhost:5001/gethistory/${user_id}`
+      `${env_data.base_url}/gethistory/${user_id}`
     );
 
     setEarningHistory(response.data.all_history);

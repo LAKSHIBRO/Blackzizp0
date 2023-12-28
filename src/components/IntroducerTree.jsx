@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { OrganizationChart } from 'primereact/organizationchart';
 import axios from 'axios';
 import jwt_decode from 'jwt-decode';
+import { env_data } from '../config/config';
 
 export default function IntroducerTree() {
   const [irFamily, setIrFamily] = useState([]);
@@ -12,10 +13,10 @@ export default function IntroducerTree() {
 
   const getRefUsers = async () => {
     try {
-      const resp = await axios.get('http://localhost:5001/token');
+      const resp = await axios.get(`${env_data.base_url}/token`);
       const decoded = jwt_decode(resp.data.accessToken);
       const user_code = decoded.user_code;
-      const resIrFamily = await axios.get(`http://localhost:5001/getIrFamily/get/${user_code}`);
+      const resIrFamily = await axios.get(`${env_data.base_url}/getIrFamily/get/${user_code}`);
       console.log('resIrFamily', resIrFamily)
       setIrFamily(resIrFamily.data.data);
     } catch (error) {

@@ -9,6 +9,7 @@ import commonbg from "../Assets/images/gergeg-01.png";
 import AnimatedImage from "../components/AnimatedBG";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
+import { env_data } from "../config/config";
 
 const MyActivePackages = () => {
   useEffect(() => {
@@ -16,7 +17,7 @@ const MyActivePackages = () => {
   }, []);
   const [resData, setResData] = useState([]);
   const getHistory = async () => {
-    const user_response = await axios.get("http://localhost:5001/token");
+    const user_response = await axios.get(`${env_data.base_url}/token`);
     const decoded = jwt_decode(user_response.data.accessToken);
     console.log(
       "🚀 ~ file: MyProfile.jsx:121 ~ refreshToken ~ decoded:",
@@ -25,7 +26,7 @@ const MyActivePackages = () => {
     const user_id = decoded.userId
 
     const response = await axios.get(
-      `http://localhost:5001/getpackages/${user_id}`
+      `${env_data.base_url}/getpackages/${user_id}`
     );
     console.log(
       "🚀 ~ file: MyActivePackages.jsx:33 ~ getHistory ~ response:",

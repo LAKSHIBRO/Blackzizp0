@@ -6,6 +6,7 @@ import CryptoBubbleChart from "../components/CryptoBubble";
 import axios from "axios";
 import logo from "../Assets/images/logo.png";
 import AnimateImage from "../components/animateImage";
+import { env_data } from "../config/config";
 
 
 const Login = () => {
@@ -32,7 +33,7 @@ const Login = () => {
     e.preventDefault();
     try {
       //   setWait(true);
-      const res = await axios.post("http://localhost:5001/login", {
+      const res = await axios.post(`${env_data.base_url}/login`, {
         email: email,
         password: password,
         ipv4: ip,

@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Popup from 'reactjs-popup';
 import axios from "axios";
+import { env_data } from '../config/config';
 
 const NotificationData = [
   {
@@ -48,7 +49,7 @@ const ToolTipPositions = ({ trigger, users, userData }) => {
     console.log("asd", user_id, position);
     try {
       //   setWait(true);
-      const res = await axios.put("http://localhost:5001/setposition", {
+      const res = await axios.put(`${env_data.base_url}/setposition`, {
         user_id: user_id,
         position: position,
         loged_user_id: userData.userId

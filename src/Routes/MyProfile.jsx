@@ -12,6 +12,7 @@ import SwipeableViews from "react-swipeable-views-react-18-fix";
 import userprofile from "../Assets/images/user.jpg";
 import jwt_decode from "jwt-decode";
 import axios from "axios";
+import { env_data } from "../config/config";
 
 const Current =
   "https://cdn.glitch.global/c58699df-f192-4af9-bca5-0e1daf50c2f9/current.png?v=1670972338225";
@@ -117,7 +118,7 @@ const MyProfile = () => {
 
   const refreshToken = async () => {
     try {
-      const response = await axios.get("http://localhost:5001/token");
+      const response = await axios.get(`${env_data.base_url}/token`);
       setToken(response.data.accessToken);
       const decoded = jwt_decode(response.data.accessToken);
       console.log(
@@ -180,7 +181,7 @@ const MyProfile = () => {
     async (config) => {
       const currentDate = new Date();
       if (expire * 1000 < currentDate.getTime()) {
-        const response = await axios.get("http://localhost:5001/token");
+        const response = await axios.get(`${env_data.base_url}/token`);
         console.log(
           "🚀 ~ file: Account.js:109 ~ axiosJWT.interceptors.request.use ~ response:",
           response
