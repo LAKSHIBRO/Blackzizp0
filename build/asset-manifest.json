@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.6527e138.css",
-    "main.js": "/static/js/main.aec4e860.js",
+    "main.js": "/static/js/main.8a983e75.js",
     "static/media/ada-coin.png": "/static/media/ada-coin.f085d37b14bd875082f3.png",
     "static/media/dodge.png": "/static/media/dodge.79095abc7edcb69770f8.png",
     "static/media/tron-coin.png": "/static/media/tron-coin.e14da101eb69534ae3c7.png",
@@ -42,10 +42,10 @@
     "static/media/revicons.woff": "/static/media/revicons.e8746a624ed098489406.woff",
     "index.html": "/index.html",
     "main.6527e138.css.map": "/static/css/main.6527e138.css.map",
-    "main.aec4e860.js.map": "/static/js/main.aec4e860.js.map"
+    "main.8a983e75.js.map": "/static/js/main.8a983e75.js.map"
   },
   "entrypoints": [
     "static/css/main.6527e138.css",
-    "static/js/main.aec4e860.js"
+    "static/js/main.8a983e75.js"
   ]
 }
