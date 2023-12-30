@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { TuneRounded, ArrowDropDownRounded } from "@mui/icons-material";
 import bitcoin from "../Assets/Icons/bitcoin coin.png";
 import rank from "../Assets/Icons/rank.png";
@@ -151,7 +151,10 @@ const MyEarnings = () => {
 
   // Slice the data to limit the row count
   const limitedData = filteredData?.slice(0, rowCount);
-  console.log("🚀 ~ file: MyEarnings.jsx:151 ~ MyEarnings ~ limitedData:", limitedData)
+  console.log(
+    "🚀 ~ file: MyEarnings.jsx:151 ~ MyEarnings ~ limitedData:",
+    limitedData
+  );
 
   const [allTotal, setAllTotal] = useState(0);
   const [allText, setAllText] = useState("All");
@@ -200,7 +203,10 @@ const MyEarnings = () => {
     );
 
     setEarningHistory(response.data.all_history);
-    console.log("🚀 ~ file: MyEarnings.jsx:200 ~ getHistory ~ response.data.all_history:", response.data.all_history)
+    console.log(
+      "🚀 ~ file: MyEarnings.jsx:200 ~ getHistory ~ response.data.all_history:",
+      response.data.all_history
+    );
   };
 
   return (
@@ -283,27 +289,27 @@ const MyEarnings = () => {
 
             <div className="dash-table mt-5 w-full overflow-x-auto">
               <table className="w-full border-[1px] border-[#565656] ">
+                <th className="uppercase text-[12px] text-white p-2 border-[#565656] border-r-[1px] border-opacity-40">
+                  WITHDRAWAL DATE
+                </th>
                 <th className="uppercase text-[12px] text-white p-2 border-[#565656] border-r-[1px]  border-opacity-40">
                   EARNING TYPE
                 </th>
                 <th className="uppercase text-[12px] text-white p-2 border-[#565656] border-r-[1px] border-opacity-40">
                   AMOUNT
                 </th>
-                <th className="uppercase text-[12px] text-white p-2 border-[#565656] border-r-[1px] border-opacity-40">
-                  PAYMENT DATE
-                </th>
 
                 <tbody>
                   {limitedData.map((row) => (
                     <tr key={row.id}>
+                      <td className=" text-[12px] text-white p-2 border-[#565656] border-[1px] border-opacity-40">
+                        {row.createdAt}
+                      </td>
                       <td className="request-type text-[12px] text-white p-2 border-[#565656] border-[1px] border-opacity-40">
                         {row.type}
                       </td>
                       <td className=" text-[12px] text-white p-2 border-[#565656] border-[1px] border-opacity-40">
                         {row.amount} usdt
-                      </td>
-                      <td className=" text-[12px] text-white p-2 border-[#565656] border-[1px] border-opacity-40">
-                        {row.createdAt}
                       </td>
                     </tr>
                   ))}

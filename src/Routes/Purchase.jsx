@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { TuneRounded, ArrowDropDownRounded } from '@mui/icons-material';
 import bitcoin from '../Assets/Icons/bitcoin coin.png';
 import rank from '../Assets/Icons/rank.png';
@@ -6,7 +6,6 @@ import { Search, Menu } from '@mui/icons-material';
 import commonbg from '../Assets/images/gergeg-01.png';
 import AnimatedImage from '../components/AnimatedBG';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import jwt_decode from "jwt-decode";
 
 import { faCrown, faCoins, faShield, faGem } from '@fortawesome/free-solid-svg-icons';
 import DefaultCoinChart from '../components/DefaultCoinChart';
@@ -15,79 +14,71 @@ import Popup from 'reactjs-popup';
 
 
 import PopUp from '../components/PopUp';
-import axios from 'axios';
-import { env_data } from '../config/config';
 
 
 const Purchase = () => {
 
-    useEffect(() => {
-        getDetails();
-      }, []);
 
 
+    const vipDetails = [
+        {
+          name: "VIP",
+          icon: faCrown,
+          list: ["2% Registration Fee", "Daily Maxout $5000"],
+          price: [100000],
+          pkg: 
+    { id: 10, packageId: "vip", amount: 100000, active: 0 },
+        },
+      ];
     
-    
-   
+      const commonDetails = [
+        {
+          name: "GOLD",
+          icon: faCoins,
+          list: ["Daily Maxout $1000", "Inv. Fee $10"],
+          price: [100, 200, 300],
+          pkg: [
+            { id: 1, packageId: "gold", amount: 100, active: 1 },
+            { id: 2, packageId: "gold", amount: 250, active: 0 },
+            { id: 3, packageId: "gold", amount: 500, active: 1 },
+          ],
+        },
+        {
+          name: "platinum",
+          icon: faShield,
+          list: ["Daily Maxout $2000", "Inv. Fee $30"],
+          price: [1000, 2000, 3000],
+          pkg: [
+            { id: 4, packageId: "platinum", amount: 1000, active: 0 },
+            { id: 5, packageId: "platinum", amount: 2500, active: 0 },
+            { id: 6, packageId: "platinum", amount: 5000, active: 0 },
+          ],
+        },
+        {
+          name: "Diamond",
+          icon: faGem,
+          list: ["Daily Maxout $3000", "2% in Investment"],
+          pkg: [
+            { id: 7, packageId: "Diamond", amount: 10000, active: 0 },
+            { id: 8, packageId: "Diamond", amount: 25000, active: 0 },
+            { id: 9, packageId: "Diamond", amount: 50000, active: 0 },
+          ],
+          price: [10000, 20000, 30000],
+        },
+      ];
 
     const [isPopUpOpen, setPopUpOpen] = useState(false); // Initialize the state variable
-    const [clickedVipCard, setClickedVipCard] = useState(null); // Store data of the clicked common-card
+
     const [clickedCommonCard, setClickedCommonCard] = useState(null); // Store data of the clicked common-card
-    const [decodeValues, setDecodeValues] = useState(null);
-    const [packages, setpackages] = useState([]);
-    const [vipDetails, setVipDetails] = useState([]);
-    const [commonDetails, setCommonDetails] = useState([]);
 
-    const openPopUp = (pack) => {
+    const openPopUp = (pack, vip) => {
         setPopUpOpen(true); // Function to open the PopUp
-        setClickedVipCard(pack); // Store data of the clicked common-card
-    };
-
-    const openPopUpOthers = (pack) => {
-        setPopUpOpen(true); // Function to open the PopUp
-        setClickedCommonCard(pack); // Store data of the clicked common-card
+        setClickedCommonCard(pack, vip); // Store data of the clicked common-card
     };
 
     const closePopUp = () => {
         setPopUpOpen(false); // Function to close the PopUp
     };
-    
-    const getDetails = async () => {
-        const resp = await axios.get(`${env_data.base_url}/token`);
-        const decoded = jwt_decode(resp.data.accessToken);
-        setDecodeValues(decoded);
-
-        const packges = await axios.get(`${env_data.base_url}/getallpackages`);
-        setpackages(packges.data.packages);
-        let vip = packges.data.packages.filter(obj => obj.packageName == "vip");
-        let others = packges.data.packages.filter(obj => obj.packageName != "vip");
-    
-        setVipDetails([{
-            name: "VIP",
-            icon: faCrown,
-            list: ["2% Registration Fee", "Daily Maxout $5000"],
-            price: [vip[0].packageValue],
-            pkg: {
-                id: vip[0].id,
-                packageId: vip[0].id,
-                amount: vip[0].packageValue,
-                active: 0
-            }
-        }]);
-        let mapsOtherPcg=others.map(obj=>{
-            return{
-                    name: obj.packageName,
-                    icon: faGem,
-                    list: ["Daily Maxout $3000", "2% in Investment"],
-                    pkg: [
-                      { id: obj.id, packageId: obj.id, amount:obj.packageValue , active: 0 }
-                    ],
-                    price: [obj.packageValue],    
-            }
-        })
-
-        setCommonDetails(mapsOtherPcg)
-    }
 
 
 
@@ -162,7 +153,7 @@ const Purchase = () => {
                                             icon={icon}
                                             name={vip.name}
                                             list={vip.list}
-                                            pkg={[vip.pkg]}
+                                            price={vip.price}
                                             closePopUp={closePopUp}
                                         />
                                     )}
@@ -187,7 +178,7 @@ const Purchase = () => {
                             const icon = pack.icon
                             return (
                                 <div
-                                    onClick={() => openPopUpOthers(pack)}
+                                    onClick={() => openPopUp(pack)}
                                     key={index}
                                     className='common-card w-[240px] h-[360px] rounded-[8px] cursor-pointer bg-[#151515] flex flex-col shadow-xl shadow-black relative z-20 '>
                                     <div className='price-top rounded-[8px] bg-[#C6C6C6] w-[241px] h-[150px] border-[1px] border-[#151515]  right-0 items-center'>
@@ -222,11 +213,12 @@ const Purchase = () => {
 
                                     {isPopUpOpen && clickedCommonCard && (
                                         <PopUp
-                                            icon={pack.icon}
-                                            name={pack.name}
-                                            list={pack.list}
+                                            icon={clickedCommonCard.icon}
+                                            name={clickedCommonCard.name}
+                                            list={clickedCommonCard.list}
+                                            price={clickedCommonCard.price}
                                             closePopUp={closePopUp}
-                                            pkg={pack.pkg}
+                                            pkg={clickedCommonCard.pkg}
                                         />
                                     )}
 

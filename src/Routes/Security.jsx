@@ -291,7 +291,7 @@ const Security = () => {
                     </div>
 
 
-                    <div className='flex flex-col w-full  md:space-x-[44px] mt-[44px]  space-x-0  relative border-[1px] border-[#565656] bg-[#151515] rounded-md'>
+                    {/* <div className='flex flex-col w-full  md:space-x-[44px] mt-[44px]  space-x-0  relative border-[1px] border-[#565656] bg-[#151515] rounded-md'>
 
                         <div className='flex flex-row space-x-5 justify-start p-3 items-center'>
                             <span className='text-[#E08E20]'><VerifiedUser /></span>
@@ -404,12 +404,12 @@ const Security = () => {
 
 
 
-                    </div>
+                    </div> */}
 
 
 
 
-                    <div className='flex flex-col w-full  md:space-x-[44px] mt-[44px]  space-x-0  relative border-[1px] border-[#565656] bg-[#151515] rounded-md'>
+                    {/* <div className='flex flex-col w-full  md:space-x-[44px] mt-[44px]  space-x-0  relative border-[1px] border-[#565656] bg-[#151515] rounded-md'>
 
                         <div className='flex flex-row space-x-5 justify-start p-3 items-center'>
                             <span className='text-[#E08E20]'><CurrencyBitcoin /></span>
@@ -490,7 +490,7 @@ const Security = () => {
 
 
 
-                    </div>
+                    </div> */}
 
 
 

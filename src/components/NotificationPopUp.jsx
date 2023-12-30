@@ -1,37 +1,13 @@
-
-
-import React, { useState, useEffect, useRef } from 'react';
-import Popup from 'reactjs-popup';
+import React, { useState, useEffect, useRef } from "react";
+import Popup from "reactjs-popup";
 import axios from "axios";
-import { env_data } from '../config/config';
-
-const NotificationData = [
-  {
-    id: 1,
-    fname: 'Nimal',
-    lname: 'Chamara',
-  },
-  {
-    id: 2,
-    fname: 'Amasha',
-    lname: 'Madushani',
-  },
-  {
-    id: 3,
-    fname: 'Pathum',
-    lname: 'Kavinga',
-  },
-  {
-    id: 4,
-    fname: 'Kasun',
-    lname: 'Dilranga',
-  },
-];
+import { env_data } from "../config/config";
 
 const ToolTipPositions = ({ trigger, users, userData }) => {
-  console.log("🚀 ~ file: NotificationPopUp.jsx:30 ~ ToolTipPositions ~ users:", userData)
-  const [notifications, setNotifications] = useState(users?.data);
-  const [notificationCount, setNotificationCount] = useState(users?.data?.length);
+  const [notifications, setNotifications] = useState(users?.data.filter(item => item.isAssigned !== true));
+  const [notificationCount, setNotificationCount] = useState(
+    users?.data?.length
+  );
 
   const popupRef = useRef(null);
 
@@ -42,7 +18,6 @@ const ToolTipPositions = ({ trigger, users, userData }) => {
   };
 
   useEffect(() => {
-
     setNotificationCount(notifications.length);
   }, [notifications]);
   const Assign = async (user_id, position, index) => {
@@ -52,9 +27,8 @@ const ToolTipPositions = ({ trigger, users, userData }) => {
       const res = await axios.put(`${env_data.base_url}/setposition`, {
         user_id: user_id,
         position: position,
-        loged_user_id: userData.userId
+        loged_user_id: userData.userId,
       });
-      console.log("🚀 ~ file: NotificationPopUp.jsx:55 ~ Assign ~ res:", res)
       handleRemoveNotification(index);
       if (notificationCount === 1) {
         closePopup();
@@ -83,7 +57,7 @@ const ToolTipPositions = ({ trigger, users, userData }) => {
     <Popup
       trigger={trigger}
       position="left top"
-      on={['hover', 'focus']}
+      on={["hover", "focus"]}
       ref={popupRef}
       closeOnDocumentClick={false}
       closeOnEscape={false}
@@ -103,13 +77,12 @@ const ToolTipPositions = ({ trigger, users, userData }) => {
                   <h3 className="text-white md:text-[1rem] text-[12px]">
                     {notify.username} has joined
                   </h3>
-                  <h4 className='text-[#565656] text-[12px]'>Assign a slot</h4>
+                  <h4 className="text-[#565656] text-[12px]">Assign a slot</h4>
                   <div className="controls flex flex-row px-2 justify-center space-x-5">
                     <button
                       className="py-1 px-3 rounded-sm bg-[#ffffff] text-[#151515] uppercase font-semibold text-[10px] outline-none hover:bg-[#FFA524] hover:text-white"
                       onClick={() => {
-                        Assign(notify.id, 'left', index)
-
+                        Assign(notify.id, "left", index);
                       }}
                     >
                       Left
@@ -117,8 +90,7 @@ const ToolTipPositions = ({ trigger, users, userData }) => {
                     <button
                       className="py-1 px-3 rounded-sm bg-[#ffffff] text-[#151515] uppercase font-semibold text-[10px] outline-none hover:bg-[#FFA524] hover:text-white"
                       onClick={() => {
-                        Assign(notify.id, 'right', index)
-
+                        Assign(notify.id, "right", index);
                       }}
                     >
                       Right

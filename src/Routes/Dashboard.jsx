@@ -14,18 +14,14 @@ import {
 import CoinCarousel from "../components/CoinCarousel";
 import DateCalendarValue from "../components/Calendar";
 import { Search, Menu } from "@mui/icons-material";
-import commonbg from "../Assets/images/gergeg-01.png";
 import AnimatedImage from "../components/AnimatedBG";
-// import LiveMarket from "../components/LiveMarket";
-// import Trending from "../components/Trending";
+
 import CoinChart from "../components/CoinChart";
 import CoinDetail from "../components/CoinDetail";
 import { useNavigate } from "react-router-dom";
 import DefaultCoinChart from "../components/DefaultCoinChart";
 import ToolTipPositions from "../components/NotificationPopUp";
 import { env_data } from "../config/config";
-// import { getNotificationCount } from '../components/NotificationPopUp';
-// import ToolTipPositions from '../components/NotificationPopUp';
 
 const Dashboard = () => {
   useEffect(() => {
@@ -34,12 +30,10 @@ const Dashboard = () => {
 
   const navigate = useNavigate();
 
-  // Initialize selectedCoin state with a default coin (e.g., the first coin)
   const [selectedCoin, setSelectedCoin] = useState(null);
   const [refUsers, setRefUsers] = useState(null);
   const [decodeValues, setDecodeValues] = useState(null);
 
-  // Function to update selectedCoin when a new coin is selected
   const handleCoinSelection = (coin) => {
     setSelectedCoin(coin);
   };
@@ -49,22 +43,16 @@ const Dashboard = () => {
     const resp = await axios.get(`${env_data.base_url}/token`);
     const decoded = jwt_decode(resp.data.accessToken);
     setDecodeValues(decoded);
-    console.log(
-      "🚀 ~ file: CurrentWallet.jsx:164 ~ getHistory ~ resp:",
-      decoded
-    );
+
     const user_code = decoded.user_code;
     const response = await axios.get(
       `${env_data.base_url}/newcommer/get/${user_code}`
     );
-    console.log(
-      "🚀 ~ file: Dashboard.jsx:54 ~ getRefUsers ~ response:",
-      response.data.data
-    );
+
+   
     const resIrFamily = await axios.get(
       `${env_data.base_url}/getIrFamily/get/${user_code}`
     );
-    console.log("🚀 ~ resIrFamily:", resIrFamily.data.data);
     setIrFamily(resIrFamily.data.data);
     setRefUsers(response.data);
   };
@@ -75,84 +63,25 @@ const Dashboard = () => {
     setPopUpOpen(false);
   };
 
-  const tableData = [
-    {
-      id: 1,
-      IRname: "John78",
-      fname: "AAA",
-      lname: "BBB",
-      regdate: "2023-05-06",
-      actdate: "2023-05-06",
-    },
-    {
-      id: 2,
-      IRname: "TomHust764",
-      fname: "AAA",
-      lname: "BBB",
-      regdate: "2023-05-06",
-      actdate: "2023-05-06",
-    },
-    {
-      id: 3,
-      IRname: "Pete67GH",
-      fname: "AAA",
-      lname: "BBB",
-      regdate: "2023-05-06",
-      actdate: "2023-05-06",
-    },
-    {
-      id: 4,
-      IRname: "AlvoJK8",
-      fname: "AAA",
-      lname: "BBB",
-      regdate: "2023-05-06",
-      actdate: "2023-05-06",
-    },
-    {
-      id: 5,
-      IRname: "Smith6",
-      fname: "AAA",
-      lname: "BBB",
-      regdate: "2023-05-06",
-      actdate: "2023-05-06",
-    },
-    {
-      id: 6,
-      IRname: "Nipun87",
-      fname: "AAA",
-      lname: "BBB",
-      regdate: "2023-05-06",
-      actdate: "2023-05-06",
-    },
-    {
-      id: 7,
-      IRname: "Kasun098",
-      fname: "AAA",
-      lname: "BBB",
-      regdate: "2023-05-06",
-      actdate: "2023-05-06",
-    },
-  ];
-
   const [selectedRowCount, setSelectedRowCount] = useState(10);
   const [irFamily, setIrFamily] = useState();
-  const limitedTableData = tableData.slice(0, selectedRowCount);
+  const limitedTableData = irFamily?.slice(0, selectedRowCount);
   const [notificationCount, setNotificationCount] = useState(0);
+  const [searchValue, setSearchValue] = useState("");
 
+  // Add an onChange handler to update the search value
+  const handleSearchChange = (e) => {
+    setSearchValue(e.target.value);
+  };
+  const filteredData = irFamily?.filter((row) => {
+  return (
+    row.ref_code.toLowerCase().includes(searchValue.toLowerCase()) ||
+    row.username.toLowerCase().includes(searchValue.toLowerCase())
+  );
+});
   return (
     <div className="w-full bg-[#1E1E1E] h-full fixed right-0 flex flex-col ">
       <div className="res-body lg:ml-[300px] md:ml-[100px] flex flex-col">
-        {/* <div className='sm:h-[77px] bg-[#151515] flex flex-row w-full justify-start items-center space-x-5'>
-                    <span className='text-[16px] text-[#FFA524]'><Menu /></span>
-                    <div className='w-[375px] rounded-[6px] h-[44px] bg-[#1E1E1E]  flex flex-row justify-center items-center'>
-
-                        <input type="text" className='w-[330px] h-full p-2 bg-transparent outline-none text-white ' placeholder='search...' />
-                        <div className='h-[44px] w-[44px] bg-[#FFA524] rounded-tr-[6px] rounded-br-[6px] justify-center items-center flex'>
-                            <span className='text-[16px] text-[#151515]'><Search /></span>
-                        </div>
-                    </div> 
-                </div> */}
-
         <div
           className="flex flex-col dash-body w-full h-screen sm:p-8 p-3 overflow-y-scroll pt-[66px] "
           id="style-6"
@@ -192,7 +121,6 @@ const Dashboard = () => {
           </div>
 
           <div className="w-full mt-5 mb-5 relative bg-[#151515] p-5 flex flex-col rounded-[6px]">
-            {/* <LiveMarket onSelectCoin={handleCoinSelection} /> */}
             <div className="coin-details sm:w-[80%] mt-3 flex flex-col justify-center mx-auto w-full">
               {selectedCoin ? (
                 <>
@@ -202,18 +130,14 @@ const Dashboard = () => {
                 <>
                   <h2 className="text-white">Coin Name</h2>
                   <p className="text-white">Coin BTC Price</p>
-                  {/* <DefaultCoinChart /> */}
-                  {/* <Trending /> */}
                 </>
               )}
             </div>
-
-            {/* <DefaultCoinChart /> */}
           </div>
 
-          <div className="w-full mt-10 mb-5">
+          {/* <div className="w-full mt-10 mb-5">
             <CoinCarousel />
-          </div>
+          </div> */}
 
           <div className="res-mid-body mid-body mt-5 w-full flex lg:flex-row flex-col lg:mb-0 justify-center items-center relative">
             <div className="dash-indicators  lg:h-[499px] w-full  bg-[#151515] bg-opacity-40 rounded-[14px] flex lg:flex-row flex-col md:flex-col justify-center lg:space-x-6 items-center sm:p-5 lg:p-0">
@@ -225,7 +149,6 @@ const Dashboard = () => {
                       navigate("/MyProfile");
                     }}
                   >
-                    {/* <h3 className='text-white text-[4rem] uppercase drop-shadow-lg'>J</h3> */}
                     <img src="" alt="profile image" />
                   </div>
                   <h2 className="mt-3 text-[18px] text-white">John Lowrance</h2>
@@ -265,11 +188,6 @@ const Dashboard = () => {
                     </h4>
                   </div>
                 </div>
-
-                {/* <h3 className=' text-[12px] text-white text-center mt-5'>
-                                    Welcome to <span className='text-[#FFA524]'>BLACKZIZ,</span> DO NOT share your credentials with anyone
-                                    for your safety
-                                </h3> */}
               </div>
               <div className="lg:w-1/3 sm:w-full md:w-full">
                 <DateCalendarValue />
@@ -297,7 +215,9 @@ const Dashboard = () => {
                   </span>
                 </div>
                 <h3 className="text-white sm:text-[16px]">USERS COUNT</h3>
-                <h3 className="text-white sm:text-[2rem]">{irFamily?.length}</h3>
+                <h3 className="text-white sm:text-[2rem]">
+                  {irFamily?.length}
+                </h3>
                 <button className="lg:py-3 lg:px-6 text-[12px] sm:w-[128px] font-semibold capitalize bg-[#FFA524] rounded-md py-2 px-4 sm:py-2 sm:px-4">
                   View count
                 </button>
@@ -329,7 +249,7 @@ const Dashboard = () => {
 
                   <h3 className="text-white text-center sm:text-[20px]">
                     {" "}
-                    USDT {decodeValues ? decodeValues.balance : 0.00}
+                    USDT {decodeValues ? decodeValues.balance : 0.0}
                   </h3>
                 </div>
 
@@ -350,7 +270,7 @@ const Dashboard = () => {
 
                   <h3 className="text-white text-center sm:text-[20px]">
                     {" "}
-                    USDT {decodeValues ? decodeValues.balance : 0.00}
+                    USDT {decodeValues ? decodeValues.balance : 0.0}
                   </h3>
                 </div>
 
@@ -398,6 +318,7 @@ const Dashboard = () => {
                 </span>
                 <div className="sm:w-[144px] sm:h-[38px] md:w-[200px] md:h-[44px] w-[128px] h-[32px] bg-[#565656] bg-opacity-10 rounded-[3px] relative flex justify-between items-center">
                   <input
+                   onChange={handleSearchChange}
                     type="text"
                     className="bg-transparent oultine-none sm:w-[144px] md:w-[200px] w-[128px] h-[32px] border-none p-2 text-white"
                     placeholder="search"
@@ -424,31 +345,30 @@ const Dashboard = () => {
                   <th className="uppercase text-[12px] text-white p-2">
                     activated date
                   </th>
-                  {/* <th className="uppercase text-[12px] text-white p-2">
-                    action
-                  </th> */}
 
-                  <tbody>
-                    {irFamily?.map((row) => (
-                      <tr className="w-full" key={row.id}>
-                        <td className=" text-[12px] text-white p-2 border-[#565656] border-[1px] border-opacity-40">
-                          {row.ref_code}
-                        </td>
-                        <td className=" text-[12px] text-white p-2 border-[#565656] border-[1px] border-opacity-40">
-                          {row.username}
-                        </td>
-                        <td className=" text-[12px] text-white p-2 border-[#565656] border-[1px] border-opacity-40">
-                          {row.last_name}
-                        </td>
-                        <td className=" text-[12px] text-white p-2 border-[#565656] border-[1px] border-opacity-40">
-                          {row.createdAt}
-                        </td>
-                        <td className=" text-[12px] text-white p-2 border-[#565656] border-[1px] border-opacity-40">
-                          {row.createdAt}
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
+                  {irFamily && (
+                    <tbody>
+                      {filteredData?.map((row) => (
+                        <tr className="w-full" key={row.id}>
+                          <td className=" text-[12px] text-white p-2 border-[#565656] border-[1px] border-opacity-40">
+                            {row.ref_code}
+                          </td>
+                          <td className=" text-[12px] text-white p-2 border-[#565656] border-[1px] border-opacity-40">
+                            {row.username}
+                          </td>
+                          <td className=" text-[12px] text-white p-2 border-[#565656] border-[1px] border-opacity-40">
+                            {row.last_name}
+                          </td>
+                          <td className=" text-[12px] text-white p-2 border-[#565656] border-[1px] border-opacity-40">
+                            {row.createdAt}
+                          </td>
+                          <td className=" text-[12px] text-white p-2 border-[#565656] border-[1px] border-opacity-40">
+                            {row.createdAt}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  )}
                 </table>
               </div>
             )}
