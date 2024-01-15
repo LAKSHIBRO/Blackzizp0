@@ -79,6 +79,20 @@ const Dashboard = () => {
     row.username.toLowerCase().includes(searchValue.toLowerCase())
   );
 });
+
+function getPositionPercentage(data) {
+  const leftExists = data.some(item => item.position === "left");
+  const rightExists = data.some(item => item.position === "right");
+
+  if (leftExists && rightExists) {
+      return 100;
+  } else if (leftExists || rightExists) {
+      return 50;
+  } else {
+      return 0;
+  }
+}
+
   return (
     <div className="w-full bg-[#1E1E1E] h-full fixed right-0 flex flex-col ">
       <div className="res-body lg:ml-[300px] md:ml-[100px] flex flex-col">
@@ -142,7 +156,7 @@ const Dashboard = () => {
           <div className="res-mid-body mid-body mt-5 w-full flex lg:flex-row flex-col lg:mb-0 justify-center items-center relative">
             <div className="dash-indicators  lg:h-[499px] w-full  bg-[#151515] bg-opacity-40 rounded-[14px] flex lg:flex-row flex-col md:flex-col justify-center lg:space-x-6 items-center sm:p-5 lg:p-0">
               <div className="dash-profile flex flex-col md:flex-row p-5 lg:w-2/3 lg:h-[467px] sm:w-full sm:h-full md:w-full bg-[#151515] rounded-[6px] border-[1px] border-[#565656] lg:ml-[26px]  shadow-lg shadow-black items-center">
-                <div className="flex flex-col md:w-1/3 justify-center items-center w-full">
+                {/* <div className="flex flex-col md:w-1/3 justify-center items-center w-full">
                   <div
                     className="profile-img md:w-[144px] md:h-[144px] w-[100px] h-[100px] rounded-full bg-gradient-to-b from-[#FFDC4A] to-[#E08E20] flex justify-center items-center cursor-pointer"
                     onClick={() => {
@@ -152,7 +166,7 @@ const Dashboard = () => {
                     <img src="" alt="profile image" />
                   </div>
                   <h2 className="mt-3 text-[18px] text-white">John Lowrance</h2>
-                </div>
+                </div> */}
 
                 <div className="profile-content flex flex-col mt-3 w-[90%] pb-5 pt-5 border-collapse border-t-[1px] border-b-[1px] border-[#565656] border-opacity-40 space-y-5">
                   <div className="rank-row flex flex-row w-full p-2 justify-between items-center">
@@ -201,11 +215,16 @@ const Dashboard = () => {
           <div className="My_Wallet_Details flex flex-col mt-6 w-full">
             <div className="MWD_row_1 flex sm:flex-wrap md:flex-wrap lg:flex-wrap gap-5 w-full justify-center items-center ">
               <div className="res-mb-card lg:w-3/12 space-y-2 flex flex-col lg:h-[259px] justify-center items-center sm:w-3/12 sm:h-full p-3 w-full h-auto bg-[#151515] rounded-[6px] border-[1px] border-[#565656] shadow-lg shadow-black">
-                <div className="chart-ind sm:w-[160px] sm:h-[160px] relative">
+                {/* <div className="chart-ind sm:w-[160px] sm:h-[160px] relative">
                   <img src={chart} alt="" className="object-cover" />
-                </div>
+                </div> */}
+{/* <div class="half-circle-container">
+  Your Text
+</div> */}
+
+
                 <h3 className="text-white sm:text-[16px]">IR Allowance</h3>
-                <span className="text-[#565656] text-[14px]">40% Complete</span>
+               { irFamily&&<span className="text-[#565656] text-[14px]">{getPositionPercentage(irFamily)}% Complete</span>}
               </div>
 
               <div className="res-mb-card lg:w-3/12  space-y-2 flex flex-col lg:h-[259px] justify-center items-center sm:w-3/12 sm:h-full p-3 w-full  h-auto bg-[#151515] rounded-[6px] border-[1px] border-[#565656] shadow-lg shadow-black">
@@ -253,10 +272,10 @@ const Dashboard = () => {
                   </h3>
                 </div>
 
-                <div className="flex flex-row w-full justify-between items-center ">
+                {/* <div className="flex flex-row w-full justify-between items-center ">
                   <h3 className="text-[#565656] sm:text-[14px]">Last Income</h3>
                   <h3 className="text-[#565656] sm:text-[14px]">USDT 52.64</h3>
-                </div>
+                </div> */}
               </div>
 
               <div className="res-mb-card-2 md:w-5/12 w-full flex flex-col  justify-center space-y-3 p-3 sm:w-full sm:h-[186px] bg-[#151515] rounded-[6px] border-[1px] border-[#565656] shadow-lg shadow-black">
@@ -270,7 +289,7 @@ const Dashboard = () => {
 
                   <h3 className="text-white text-center sm:text-[20px]">
                     {" "}
-                    USDT {decodeValues ? decodeValues.balance : 0.0}
+                    USDT {decodeValues ? decodeValues.wallet : 0.0}
                   </h3>
                 </div>
 

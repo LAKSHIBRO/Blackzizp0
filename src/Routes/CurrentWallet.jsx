@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState,useRef, useEffect } from "react";
 import {
   TuneRounded,
   ArrowDropDownRounded,
@@ -28,11 +28,13 @@ const CurrentWallet = () => {
   useEffect(() => {
     refreshToken();
     getHistory();
+    getHistoryWallet();
   }, []);
 
   const [walletAddress, setWalletAddress] = useState("");
   const [walletBalance, setWalletBalance] = useState("");
   const [selectedOption, setSelectedOption] = useState(null);
+  const [earningHistory, setEarningHistory] = useState([]);
 
   const [errorMessage, setErrorMessage] = useState(null);
   const [defaultAccount, setDefaultAccount] = useState(null);
@@ -58,7 +60,18 @@ const CurrentWallet = () => {
       setErrorMessage("Install MetaMask please!!");
     }
   };
+  const [selectedFiles, setSelectedFiles] = useState([]);
 
+  const handleFileInputChange = (e) => {
+    const files = e.target.files;
+    const newSelectedFiles = [];
+
+    for (let i = 0; i < Math.min(2, files.length); i++) {
+      newSelectedFiles.push(files[i]);
+    }
+
+    setSelectedFiles(newSelectedFiles);
+  };
   const accountChanged = (accountName) => {
     setDefaultAccount(accountName);
     getUserBalance(accountName);
@@ -93,31 +106,35 @@ const CurrentWallet = () => {
     return ethAmount;
   }
   async function sendTransaction() {
-    console.log("pressed", defaultAccount, withdrawAmount);
-    const weiAmount = usdtToWei(withdrawAmount);
-    const params = [
-      {
-        from: defaultAccount[0],
-        to: "0x90fF30656Bd91eBECC89B736D181CF7FB2625AD1",
-        gas: Number(21000).toString(16),
-        gasPrice: Number(2500000).toString(16),
-        value: Number(weiAmount).toString(16),
-      },
-    ];
+    // console.log("pressed", defaultAccount, withdrawAmount);
+    // const weiAmount = usdtToWei(withdrawAmount);
+    // const params = [
+    //   {
+    //     from: defaultAccount[0],
+    //     to: "0x90fF30656Bd91eBECC89B736D181CF7FB2625AD1",
+    //     gas: Number(21000).toString(16),
+    //     gasPrice: Number(2500000).toString(16),
+    //     value: Number(weiAmount).toString(16),
+    //   },
+    // ];
 
-    try {
-      const result = await window.ethereum.request({
-        method: "eth_sendTransaction",
-        params,
-      });
-      console.log(result);
-    } catch (error) {
-      console.error(error);
-    }
+    // try {
+    //   const result = await window.ethereum.request({
+    //     method: "eth_sendTransaction",
+    //     params,
+    //   });
+    //   console.log(result);
+    // } catch (error) {
+    //   console.error(error);
+    // }
   }
+  const fileInputRef = useRef(null);
 
   const handleDivClick = (index) => {
     setSelectedOption(index);
+  };
+  const openFileBrowser = () => {
+    fileInputRef.current.click();
   };
 
   const wmDivs = [
@@ -256,6 +273,40 @@ const CurrentWallet = () => {
 console.log('first',responseControls.data.controls)
     setControls(responseControls.data.controls);
   };
+  const getHistoryWallet = async () => {
+    const resp = await axios.get(`${env_data.base_url}/token`);
+    const decoded = jwt_decode(resp.data.accessToken);
+
+    console.log(
+      "🚀 ~ file: CurrentWallet.jsx:164 ~ getHistoryWallet ~ resp:",
+      decoded
+    );
+    const user_id = decoded.userId;
+    const response = await axios.get(
+      `${env_data.base_url}/gethistory/${user_id}`
+    );
+
+    setEarningHistory(response.data.all_history);
+    calculateTotalAmountByType(response.data.all_history)
+    console.log(
+      "🚀 ~ file: MyEarnings.jsx:200 ~ getHistoryWallet ~ response.data.all_history:",
+      response.data.all_history
+    );
+  };
+
+ 
+
+function calculateTotalAmountByType(data, targetType) {
+    return data
+        .filter(item => item.type === targetType)
+        .reduce((total, item) => total + item.amount, 0);
+}
+
+const totalCommission = calculateTotalAmountByType(earningHistory, 'commission');
+const totalDailyProfit = calculateTotalAmountByType(earningHistory, 'dailyprofit');
+
+console.log('Total Commission:', totalCommission); // Output: 288.9
+console.log('Total Daily Profit:', totalDailyProfit); // Output: 102.72
 
   return (
     <div className="w-full bg-[#1E1E1E] h-full fixed right-0 flex flex-col ">
@@ -271,7 +322,7 @@ console.log('first',responseControls.data.controls)
             Dashboard > My Wallet > Current Wallet{" "}
           </h3>
 
-          <div className="lg:w-1/3 md:w-full rounded-md border-[1px] border-[#565656] h-auto flex flex-col mt-5 p-5 bg-[#151515]">
+          <div className="lg:w-1/2 md:w-full rounded-md border-[1px] border-[#565656] h-auto flex flex-col mt-5 p-5 bg-[#151515]">
             <div className="flex flex-row mt-5 w-full justify-between items-center">
               <div className="md:w-1/2 flex flex-col space-y-5 w-full">
                 <h2 className="text-white font-semibold md:text-[20px] text-[18px] capitalize">
@@ -294,7 +345,11 @@ console.log('first',responseControls.data.controls)
 
                     <h3 className="text-[#E08E20] text-[24px] font-semibold">
                       {" "}
-                      USDT 78.90
+                     Wallet one - USDT {totalCommission}
+                    </h3>
+                    <h3 className="text-[#E08E20] text-[24px] font-semibold">
+                      {" "}
+                     Wallet two - USDT {totalDailyProfit}
                     </h3>
                   </div>
                 </div>
@@ -310,52 +365,9 @@ console.log('first',responseControls.data.controls)
                 </div>
               </div>
             </div>
+            
           </div>
-          <div className="w-full rounded-md border-[1px] border-[#565656] h-auto flex flex-col mt-5 p-5 bg-[#151515]">
-            <div className="flex flex-col mt-5 w-full justify-start space-y-3 relative">
-              <h2 className="md:text-[20px] text-white font-semibold uppercase text-[18px]">
-                Meta Wallet
-              </h2>
-              {/* <div className="flex flex-col mt-3">
-                <h2 className="text-[20px] font-normal text-[#ffffff]">
-                  Current Balance
-                </h2>
-                <h2 className="text-[20px] font-normal text-[#E08E20]">
-                  USDT 100.56
-                </h2>
-              </div> */}
-            </div>
-
-            <h1 className="text-[14px] font-semibold text-white">
-              MetaMask Wallet Connection{" "}
-            </h1>
-
-            {/* <button className="text-[10px] font-semibold text-white" onClick={connectWallet}>Connect Wallet Button</button> */}
-            <h3 className="text-[14px] font-semibold text-white">
-              Address: {defaultAccount}
-            </h3>
-            <h3 className="text-[14px] font-semibold text-white">
-              Balance: {userBalance}
-            </h3>
-
-            {/* <h3>Enter Transaction Address: </h3>
-          <input type="text" placeholder="Address: "></input> */}
-
-            {errorMessage}
-            {errorMessage && (
-              <button
-              className="w-full h-[44px] mt-5 rounded-md font-bold text-[16px] text-[#151515] bg-gradient-to-r from-[#ffd62d] to-[#ffa524]" onClick={handleInstallClick}>
-                Install Chrome Extension
-              </button>
-            )}
-
-            <button
-              onClick={connectWallet}
-              className="w-full h-[44px] mt-5 rounded-md font-bold text-[16px] text-[#151515] bg-gradient-to-r from-[#ffd62d] to-[#ffa524]"
-            >
-              Connect Wallet
-            </button>
-          </div>
+    
           <div className="w-full rounded-md border-[1px] border-[#565656] h-auto flex flex-col mt-5 p-5 bg-[#151515]">
             <div className="flex flex-col mt-5 w-full justify-start space-y-3 relative">
               <h2 className="md:text-[20px] text-white font-semibold uppercase text-[18px]">
@@ -389,7 +401,7 @@ console.log('first',responseControls.data.controls)
               <h2 className="md:text-[20px] text-white font-semibold uppercase text-[18px]">
                 select Deposit method
               </h2>
-
+{/* 
               <div className="wallet-WD w-full flex flex-wrap gap-5 justify-center ">
                 {wmDivs.map((div, index) => {
                   const Icon = Icons[div.Icon];
@@ -422,7 +434,7 @@ console.log('first',responseControls.data.controls)
                     </div>
                   );
                 })}
-              </div>
+              </div> */}
 
               {/* <div className="w-3/12 h-[32px] rounded-md bg-white flex justify-center items-center mt-5">
                 <h2 className="text-[10px] font-bold capitalize">
@@ -430,7 +442,58 @@ console.log('first',responseControls.data.controls)
                 </h2>
               </div> */}
             </div>
+            <div className="form-field-container flex flex-col sm:mt-5 mt-2 w-1/2 space-y-2">
+                          <div className="form-field-label sm:flex justify-between w-full hidden ">
+                            <span className="text-white text-[12px] uppercase ">
+                              Upload Slips / Screnshots
+                            </span>
+                          </div>
 
+                          <div
+                            onClick={openFileBrowser}
+                          >
+                            <button
+                              onClick={openFileBrowser}
+                          style={{
+                              width: '100%',
+                              height: '44px',
+                              marginTop: '5px',
+                              borderRadius: '4px',
+                              fontWeight: 'bold',
+                              fontSize: '16px',
+                              color: '#151515',
+                              backgroundImage: 'linear-gradient(to right, #ffd62d, #ffa524)',
+                             
+                            }} className="w-full h-[44px] mt-5 rounded-md font-bold text-[16px] text-[#151515] bg-gradient-to-r from-[#ffd62d] to-[#ffa524]"
+                         
+                            >
+                              Choose Image(s)
+                            </button>
+                            <input
+                              type="file"
+                              ref={fileInputRef}
+                              onChange={handleFileInputChange}
+                              style={{ display: "none" }}
+                              accept="image/jpeg, image/png, image/gif"
+                              multiple
+                            />
+                          </div>
+                          <div>
+                            {selectedFiles.length > 0 && (
+                              <div>
+                                {selectedFiles.map((file, index) => (
+                                  <span
+                                    className="text-[12px] text-white"
+                                    key={index}
+                                  >
+                                    {" "}
+                                    | {file.name}
+                                  </span>
+                                ))}
+                              </div>
+                            )}
+                          </div>
+                        </div>
             <button
               disabled={!controls?.make_deposits}
               onClick={sendTransaction}style={{
@@ -481,39 +544,7 @@ console.log('first',responseControls.data.controls)
                 select withdrawal method
               </h2>
 
-              <div className="w-full flex flex-wrap gap-5 justify-center">
-                {wmDivs.map((div, index) => {
-                  const Icon = Icons[div.Icon];
 
-                  return (
-                    <div
-                      key={index}
-                      className={`wm md:w-2/12 h-[128px] w-full rounded-md border-[1px] cursor-pointer justify-center items-center flex flex-col relative overflow-hidden`}
-                      style={{
-                        borderColor:
-                          selectedOption === index ? div.bg : "#565656",
-                        color: selectedOption === index ? div.bg : "white",
-                      }}
-                      onClick={() => handleDivClick(index)}
-                    >
-                      <div className="coin-icon w-[80px] h-[80px] relative z-10">
-                        <img
-                          src={div.image}
-                          alt=""
-                          className="w-full h-full object-cover z-10"
-                        />
-                      </div>
-                      <div className="z-10 font-bold">{div.text}</div>
-
-                      <div
-                        key={index}
-                        className="bg-trans h-[50px] w-[50px] rounded-full absolute z-0 -bottom-[55px] -right-[55px]"
-                        style={{ backgroundColor: div.bg }}
-                      ></div>
-                    </div>
-                  );
-                })}
-              </div>
 
               <div className="md:w-3/12 h-[32px] rounded-md bg-white flex justify-center items-center mt-5 w-full">
                 <h2 className="text-[10px] font-bold capitalize">

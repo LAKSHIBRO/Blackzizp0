@@ -97,6 +97,7 @@ const MyProfile = () => {
   const [firstName, setFirstName] = useState("");
   const [LastName, setLastName] = useState("");
   const [mobile, setMobile] = useState("");
+  const [email, setEmail] = useState("");
   const [decodeData, setDecodeData] = useState("");
   const [balance, setBalance] = useState("");
   const [user_code, setUser_Code] = useState("");
@@ -131,6 +132,8 @@ const MyProfile = () => {
       setFirstName(decoded.first_name);
       setLastName(decoded.last_name);
       setMobile(decoded.mobile);
+      setEmail(decoded.email);
+
       setReferralID(decoded.user_code)
       if (decoded.username === null) {
         setName(false);
@@ -217,13 +220,7 @@ const MyProfile = () => {
 
           <div className="w-full rounded-md h-auto flex flex-row mt-5 p-5 justify-center items-center bg-[#151515] relative">
             <div className="flex flex-col w-full justify-center items-center p-5 space-y-5">
-              <div className="w-[156px] h-[156px] border-[#ffffff] border-[5px] rounded-full relative  object-center overflow-hidden">
-                <img
-                  src={userprofile}
-                  alt="profile image"
-                  className="object-cover"
-                />
-              </div>
+             
               <h2 className="text-[2rem] text-white font-semibold drop-shadow-md">
                 {username}
               </h2>
@@ -523,11 +520,11 @@ const MyProfile = () => {
                           </div>
                           <div className="w-3/4 p-2">
                             <input
-                              // value={firstName}
+                              // value={username}
                               onChange={(e) => setFirstName(e.target.value)}
                               type="text"
                               className="w-full p-3 bg-[#1a1a1a] border-[1px] rounded-md border-[#565656] border-opacity-40 h-[44px] outline-none md:text-[1rem] text-[12px]"
-                              placeholder={firstName}
+                              placeholder={username}
                               readOnly
                             />
                           </div>
@@ -588,14 +585,14 @@ const MyProfile = () => {
                         <div className="flex flex-row justify-center items-center">
                           <div className="w-1/4 p-2">
                             <h3 className="text-white text-[10px] md:text-[1rem]">
-                              Email{" "}
+                              Email
                             </h3>
                           </div>
                           <div className="w-3/4 p-2">
                             <input
                               type="text"
                               className="w-full p-3 bg-[#1a1a1a] border-[1px] rounded-md border-[#565656] border-opacity-40 h-[44px] outline-none md:text-[1rem] text-[12px]"
-                              placeholder="John.Lowrance45@gmail.com"
+                              placeholder={email}
                               readOnly
                             />
                           </div>
@@ -619,7 +616,7 @@ const MyProfile = () => {
                           </div>
                         </div>
 
-                        <div className="flex flex-row justify-center items-center">
+                        {/* <div className="flex flex-row justify-center items-center">
                           <div className="w-1/4 p-2">
                             <h3 className="text-white text-[10px] md:text-[1rem]">
                               Date of Birth
@@ -633,7 +630,7 @@ const MyProfile = () => {
                               readOnly
                             />
                           </div>
-                        </div>
+                        </div> */}
 
                         <div className="flex flex-row justify-center items-center">
                           <div className="w-1/4 p-2">
@@ -651,7 +648,7 @@ const MyProfile = () => {
                           </div>
                         </div>
 
-                        <div className="flex flex-row justify-center items-center">
+                        {/* <div className="flex flex-row justify-center items-center">
                           <div className="w-1/4 p-2">
                             <h3 className="text-white text-[10px] md:text-[1rem]">
                               Activated Date
@@ -665,7 +662,7 @@ const MyProfile = () => {
                               readOnly
                             />
                           </div>
-                        </div>
+                        </div> */}
                       </div>
                     </div>
                   </div>

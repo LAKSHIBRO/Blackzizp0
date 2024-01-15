@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.c803da5b.css",
-    "main.js": "/static/js/main.0ca9c0ef.js",
+    "main.css": "/static/css/main.ac163f1f.css",
+    "main.js": "/static/js/main.1e22a91c.js",
     "static/media/ada-coin.png": "/static/media/ada-coin.f085d37b14bd875082f3.png",
     "static/media/dodge.png": "/static/media/dodge.79095abc7edcb69770f8.png",
     "static/media/tron-coin.png": "/static/media/tron-coin.e14da101eb69534ae3c7.png",
@@ -41,11 +41,11 @@
     "static/media/revicons.ttf": "/static/media/revicons.57fd05d4ae650374c8de.ttf",
     "static/media/revicons.woff": "/static/media/revicons.e8746a624ed098489406.woff",
     "index.html": "/index.html",
-    "main.c803da5b.css.map": "/static/css/main.c803da5b.css.map",
-    "main.0ca9c0ef.js.map": "/static/js/main.0ca9c0ef.js.map"
+    "main.ac163f1f.css.map": "/static/css/main.ac163f1f.css.map",
+    "main.1e22a91c.js.map": "/static/js/main.1e22a91c.js.map"
   },
   "entrypoints": [
-    "static/css/main.c803da5b.css",
-    "static/js/main.0ca9c0ef.js"
+    "static/css/main.ac163f1f.css",
+    "static/js/main.1e22a91c.js"
   ]
 }

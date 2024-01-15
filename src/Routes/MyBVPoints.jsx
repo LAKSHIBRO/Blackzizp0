@@ -11,7 +11,7 @@ const MyBVPoints = () => {
   const [balance, setBalance] = useState(null);
 
   const getRefUsers = async () => {
-    const resp = await axios.get("https://black-back.onrender.com/token");
+    const resp = await axios.get("https://infinity-new-back.onrender.com/token");
     const decoded = jwt_decode(resp.data.accessToken);
 
     setBalance(decoded.balance);

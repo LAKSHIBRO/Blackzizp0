@@ -62,7 +62,7 @@ const SignUp = () => {
         backgroundColor: "white",
         color: "black",
       });
-    } else if (field === "lastName") {
+    } else if (field === "last_name") {
       setLastNameStyle({
         backgroundColor: "white",
         color: "black",
@@ -106,7 +106,7 @@ const SignUp = () => {
       .max(50, "Too Long!")
       .matches(/^[A-Za-z]+$/, "Must be only Letters")
       .required("Required"),
-    lastName: Yup.string()
+    last_name: Yup.string()
       .min(2, "Too Short!")
       .max(50, "Too Long!")
       .matches(/^[A-Za-z]+$/, "Must be only Letters")
@@ -141,7 +141,7 @@ const SignUp = () => {
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [formData, setFormData] = useState({
     username: "",
-    lastName: "",
+    last_name: "",
     email: "",
     mobile: "",
     nic: "",
@@ -232,7 +232,7 @@ console.log('objeco00t',values);
             <Formik
               initialValues={{
                 username: "",
-                lastName: "",
+                last_name: "",
                 email: "",
                 mobile: "",
                 ref_code: "",
@@ -289,9 +289,9 @@ console.log('objeco00t',values);
                           <span className="text-white text-[12px] uppercase hidden sm:block">
                             Last Name
                           </span>
-                          {errors.lastName && touched.lastName ? (
+                          {errors.last_name && touched.last_name ? (
                             <span className="text-red-600 text-[12px]">
-                              {errors.lastName}
+                              {errors.last_name}
                             </span>
                           ) : null}
                         </div>
@@ -304,17 +304,17 @@ console.log('objeco00t',values);
                           </div>
                           <Field
                             type="text"
-                            name="lastName"
-                            id="lastName"
+                            name="last_name"
+                            id="last_name"
                             style={lastNameStyle}
                             placeholder="Last Name"
                             className="w-full h-full p-2 bg-transparent outline-none text-white text-[12px] form-field-input"
                             required
                           />
                         </div>
-                        {errors.lastName && touched.lastName ? (
+                        {errors.last_name && touched.last_name ? (
                           <span className="text-red-600 text-[12px] block sm:hidden">
-                            {errors.lastName}
+                            {errors.last_name}
                           </span>
                         ) : null}
                       </div>

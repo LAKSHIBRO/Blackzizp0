@@ -16,6 +16,27 @@ code {
 }
 
 
+.half-circle-container {
+  width: 100px; /* Set the width and height to control the size of the circle */
+  height: 100px;
+  border-radius: 50%; /* Make it a circle by setting border-radius to 50% */
+  border: 5px solid transparent; /* 5px transparent border */
+  overflow: hidden; /* Hide the overflow content (half of the text will be hidden) */
+  position: relative;
+}
+
+.half-circle-container::before {
+  content: ''; /* Create a pseudo-element to represent the left half */
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  border-top: 5px solid #000; /* Top border color for the left half (adjust as needed) */
+  border-bottom: 5px solid #FFA524; /* Bottom border color for the left half (adjust as needed) */
+  box-sizing: border-box;
+}
 
 .child-link {
   transition: transform 1s ease-in-out;

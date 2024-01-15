@@ -75,6 +75,22 @@ const MyActivePackages = () => {
     console.log(filteredResultArray);
     setResData(filteredResultArray);
     console.log("relevantPackagesArray", filteredResultArray);
+
+    const result = packages.map(packageDetail => {
+      const buyPackage = buyPackagesData.find(buyPackageData => buyPackageData.id === packageDetail.packageId);
+    console.log('buyPackage',buyPackage)
+      if (buyPackage) {
+        return {
+          packageName: buyPackage.packageId,
+          amount: buyPackage.amount,
+          createdAt: packageDetail.createdAt,
+        };
+      }
+    
+      return null; // Handle the case where there is no matching buy package data
+    }).filter(item => item !== null);
+    
+    console.log('result latest arr',result);
   };
   const buyPackagesData = [
     { id: 1, packageId: "gold", amount: 100, active: 1 },

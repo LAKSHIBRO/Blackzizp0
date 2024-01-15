@@ -30,7 +30,7 @@ const MyKYC = () => {
 
   return (
     <div className="w-full bg-[#1E1E1E] h-full fixed right-0 flex flex-col ">
-      <div className="res-body lg:ml-[300px] md:ml-[100px]  flex flex-col">
+        <div className="res-body lg:ml-[300px] md:ml-[100px]  flex flex-col">
         {/* <div className='sm:h-[77px] bg-[#151515] flex flex-row w-full justify-start items-center space-x-5'>
                     <span className='text-[16px] text-[#FFA524]'><Menu /></span>
                     <div className='w-[375px] rounded-[6px] h-[44px] bg-[#1E1E1E]  flex flex-row justify-center items-center'>
@@ -52,13 +52,7 @@ const MyKYC = () => {
           </h3>
 
           <div className="w-full rounded-md border-[1px] border-[#565656] h-auto flex flex-col mt-5 p-5 bg-[#151515]">
-            <div className="w-full justify-start items-center flex flex-row">
-              <div className="flex flex-row justify-start items-center space-x-3 w-full ">
-                <span className="text-[14px] text-[#ffffff] uppercase">
-                  active kyc entries
-                </span>
-              </div>
-            </div>
+            
 
             <div className="dash-table mt-5 w-full overflow-x-auto">
               <table className="w-full border-[1px] border-[#565656] border-opacity-40">
@@ -74,7 +68,6 @@ const MyKYC = () => {
                 <th className="uppercase text-[12px] text-white p-2 border-[#565656] border-r-[1px] border-opacity-40">
                   STATUS
                 </th>
-                <th className="uppercase text-[12px] text-white p-2">Action</th>
 
                 <tbody>
                   <tr className="w-full text-center">
@@ -92,25 +85,14 @@ const MyKYC = () => {
                         approved
                       </div>
                     </td>
-                    <td className=" text-[12px] text-white p-2 border-[#565656] border-[1px] border-opacity-40 bg-[#1a1a1a]">
-                    <div className="mx-auto w-[80%]">
-                     
-                    <FormGroup>
-                                    <FormControlLabel
-                                        control={<Switch size="small" checked={checked} onChange={toggleChecked} />}
-                                        label={checked ? "Enabled" : "Disabled"} className='text-[#ffa524]'
-                                    />
-
-                                </FormGroup>
-                    </div>
-                    </td>
+                  
                   </tr>
                 </tbody>
               </table>
             </div>
           </div>
 
-          <div className="w-full rounded-md border-[1px] border-[#565656] h-auto flex flex-col mt-5 p-5 bg-[#151515]">
+          {/* <div className="w-full rounded-md border-[1px] border-[#565656] h-auto flex flex-col mt-5 p-5 bg-[#151515]">
             <div className="w-full justify-start items-center flex flex-row">
               <div className="flex flex-row justify-start items-center space-x-3 w-full ">
                 <span className="text-[14px] text-[#ffffff] uppercase">
@@ -130,10 +112,6 @@ const MyKYC = () => {
                 <th className="uppercase text-[12px] text-white p-2 border-[#565656] border-r-[1px] border-opacity-40">
                   STATUS
                 </th>
-                <th className="uppercase text-[12px] text-white p-2 border-[#565656] border-r-[1px] border-opacity-40">
-                  ACTION
-                </th>
-
                 <tbody>
                   <tr className="w-full text-center">
                     <td className=" text-[12px] text-white p-2 border-[#565656] border-[1px] border-opacity-40 bg-[#1a1a1a] text-left">
@@ -177,7 +155,7 @@ const MyKYC = () => {
                 </tbody>
               </table>
             </div>
-          </div>
+          </div> */}
 
 
           
