@@ -123,7 +123,7 @@ export default function DefaultBinaryTree() {
     //     return result;
     // } 
 
-    function createNestedArray(dataArray, parentId) {
+    function createNestedArray(mainArray, dataArray, parentId) {
       const result = [];
       
       for (const dataItem of dataArray) {
@@ -139,8 +139,8 @@ export default function DefaultBinaryTree() {
                   expanded: dataItem.expanded,
               };
     
-              const leftChild = createNestedArray(dataArray, dataItem.user_code)[0];
-              const rightChild = createNestedArray(dataArray, dataItem.user_code)[1];
+              const leftChild = createNestedArray(mainArray, dataArray, dataItem.user_code)[0];
+              const rightChild = createNestedArray(mainArray, dataArray, dataItem.user_code)[1];
     
               if (leftChild) {
                   newItem.left = leftChild;
