@@ -93,35 +93,69 @@ export default function DefaultBinaryTree() {
     //             }
     //         ]
     //     }
-    // ]);
+    // // ]);
+
+    // function createNestedArray(mainArray, dataArray, parentId) {
+    //     const result = [];
+        
+    //     for (const dataItem of dataArray) {
+    //       if (dataItem.ref_code === parentId) {
+    //         const newItem = {
+    //           id: dataItem.id,
+    //           username: dataItem.username,
+    //           user_code: dataItem.user_code,
+    //           ref_code: dataItem.ref_code,
+    //           label: dataItem.label,
+    //           className: dataItem.className,
+    //           expanded: dataItem.expanded,
+    //         };
+      
+    //         const children = createNestedArray(mainArray, dataArray, dataItem.user_code);
+      
+    //         if (children.length > 0) {
+    //           newItem.children = children;
+    //         }
+      
+    //         result.push(newItem);
+    //       }
+    //     }
+      
+    //     return result;
+    // } 
 
     function createNestedArray(mainArray, dataArray, parentId) {
-        const result = [];
-        
-        for (const dataItem of dataArray) {
+      const result = [];
+      
+      for (const dataItem of dataArray) {
           if (dataItem.ref_code === parentId) {
-            const newItem = {
-              id: dataItem.id,
-              username: dataItem.username,
-              user_code: dataItem.user_code,
-              ref_code: dataItem.ref_code,
-              label: dataItem.label,
-              className: dataItem.className,
-              expanded: dataItem.expanded,
-            };
-      
-            const children = createNestedArray(mainArray, dataArray, dataItem.user_code);
-      
-            if (children.length > 0) {
-              newItem.children = children;
-            }
-      
-            result.push(newItem);
+              const newItem = {
+                  // dataItem properties
+                  id: dataItem.id,
+                  username: dataItem.username,
+                  user_code: dataItem.user_code,
+                  ref_code: dataItem.ref_code,
+                  label: dataItem.label,
+                  className: dataItem.className,
+                  expanded: dataItem.expanded,
+              };
+    
+              const leftChild = createNestedArray(mainArray, dataArray, dataItem.user_code)[0];
+              const rightChild = createNestedArray(mainArray, dataArray, dataItem.user_code)[1];
+    
+              if (leftChild) {
+                  newItem.left = leftChild;
+              }
+    
+              if (rightChild) {
+                  newItem.right = rightChild;
+              }
+    
+              result.push(newItem);
           }
-        }
-      
-        return result;
-    } 
+      }
+    
+      return result;
+  }
     
 
     return (
